@@ -4,8 +4,9 @@ import yargs from "yargs";
 
 import day01 from "./day01";
 import day02 from "./day02";
+import day03 from "./day03";
 
-const solutions = [day01, day02];
+const solutions = [day01, day02, day03];
 
 const loadData = async (rawDay: number): Promise<string> => {
     const day = rawDay < 10 ? `0${rawDay}` : rawDay;
