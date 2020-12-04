@@ -17,12 +17,16 @@ const parsePassports = (input: string): Array<string> => {
     return input.split("\n\n");
 };
 
-const parseHeight = (height: string): [number, string] => {
+const parseHeight = (height: string): [string, string] => {
     if (height.indexOf("cm") > -1) {
-        return [parseInt(height.substring(0, height.indexOf("cm"))), "cm"];
+        return [height.substring(0, height.indexOf("cm")), "cm"];
     } else {
-        return [parseInt(height.substring(0, height.indexOf("in"))), "in"];
+        return [height.substring(0, height.indexOf("in")), "in"];
     }
+};
+
+const inRange = (val: string, lLimit: number, uLimit: number) => {
+    return parseInt(val) >= lLimit && parseInt(val) <= uLimit;
 };
 
 const solver1 = (input: string): number => {
@@ -50,20 +54,13 @@ const solver2 = (input: string): number => {
             return acc;
         }
 
-        const validBirthYear =
-            parseInt(passport.byr) >= 1920 && parseInt(passport.byr) <= 2002;
-
-        const validIssueYear =
-            parseInt(passport.iyr) >= 2010 && parseInt(passport.iyr) <= 2020;
-
-        const validExpiryYear =
-            parseInt(passport.eyr) >= 2020 && parseInt(passport.eyr) <= 2030;
+        const validBirthYear = inRange(passport.byr, 1920, 2002);
+        const validIssueYear = inRange(passport.iyr, 2010, 2020);
+        const validExpiryYear = inRange(passport.eyr, 2020, 2030);
 
         const [height, unit] = parseHeight(passport.hgt);
         const validHeight =
-            unit == "cm"
-                ? height >= 150 && height <= 193
-                : height >= 59 && height <= 76;
+            unit == "cm" ? inRange(height, 150, 193) : inRange(height, 59, 76);
 
         const validHairColour =
             passport.hcl.match(/^#(?:[0-9a-fA-F]{6})$/) != null;
@@ -77,7 +74,7 @@ const solver2 = (input: string): number => {
             "hzl",
             "oth",
         ].includes(passport.ecl);
-        
+
         const validPassportId =
             !isNaN(parseInt(passport.pid)) && passport.pid.length == 9;
 
