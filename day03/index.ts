@@ -2,19 +2,22 @@ type Map = {
     height: number;
     map: Array<string>;
     width: number;
-}
+};
 
 const parseMap = (rawMap: string): Map => {
     const rows = rawMap.split("\n");
-    const map = rows.reduce((acc, row) => [...acc, ...row.split("")], [] as Array<string>);
+    const map = rows.reduce(
+        (acc, row) => [...acc, ...row.split("")],
+        [] as Array<string>
+    );
     const width = rows[0].length;
     const height = rows.length;
 
     return {
         height,
         map,
-        width
-    }
+        width,
+    };
 };
 
 const traverseMap = (input: Map, pattern: [number, number]): number => {
@@ -22,7 +25,7 @@ const traverseMap = (input: Map, pattern: [number, number]): number => {
     let y = 0;
     const { height, map, width } = input;
     let treesHit = 0;
-    
+
     while (y < height) {
         x += pattern[0];
         y += pattern[1];
@@ -35,7 +38,7 @@ const traverseMap = (input: Map, pattern: [number, number]): number => {
     }
 
     return treesHit;
-}
+};
 
 const solver1 = (input: string): number => {
     const map = parseMap(input);
@@ -43,7 +46,13 @@ const solver1 = (input: string): number => {
 };
 
 const solver2 = (input: string): number => {
-    const traversalPatterns: Array<[number, number]> = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]];
+    const traversalPatterns: Array<[number, number]> = [
+        [1, 1],
+        [3, 1],
+        [5, 1],
+        [7, 1],
+        [1, 2],
+    ];
     const map = parseMap(input);
     return traversalPatterns.reduce((acc, pattern) => {
         return acc * traverseMap(map, pattern);
