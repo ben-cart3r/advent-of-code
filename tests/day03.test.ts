@@ -12,7 +12,7 @@ const sampleData = `..##.......
 #...##....#
 .#..#...#.#`;
 
-describe("day02", () => {
+describe("day03", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);

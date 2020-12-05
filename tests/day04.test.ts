@@ -14,9 +14,6 @@ hgt:179cm
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in`;
 
-// const sampleData2 = `pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
-// hcl:#623a2f`
-
 const sampleData2 = `pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f
 
@@ -30,7 +27,7 @@ iyr:2019
 hcl:#602927 eyr:1967 hgt:170cm
 ecl:grn pid:012533040 byr:1946`;
 
-describe("day02", () => {
+describe("day04", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);
