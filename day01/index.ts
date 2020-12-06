@@ -31,12 +31,12 @@ const solver2 = (input: Array<number>): number => {
 
 export { solver1, solver2 };
 
-export default (rawData: string): void => {
+export default (rawData: string): string => {
     const input = rawData.split("\n").map((e) => parseInt(e));
 
     const result1 = solver1(input);
     const result2 = solver2(input);
 
-    console.log(`\t Part 1 result: ${result1}`);
-    console.log(`\t Part 2 result: ${result2}`);
+    return `\t Part 1 result: ${result1}
+    \t Part 2 result: ${result2}`;
 };

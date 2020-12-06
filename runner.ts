@@ -2,19 +2,25 @@ import fs from "fs/promises";
 import path from "path";
 import yargs from "yargs";
 
-import day01 from "./day01";
-import day02 from "./day02";
-import day03 from "./day03";
-import day04 from "./day04";
-import day05 from "./day05";
+const runSolution = async (day: number) => {
+    const dirPath = day < 10 ? `./day0${day}` : `./day${day}`;
+    const dataPath = path.join(__dirname, `${dirPath}/data.txt`);
 
-const solutions = [day01, day02, day03, day04, day05];
+    console.log(`-----------\nDay ${day}\n-----------`);
+    console.time("File load time");
 
-const loadData = async (rawDay: number): Promise<string> => {
-    const day = rawDay < 10 ? `0${rawDay}` : rawDay;
-    const filePath = path.join(__dirname, `day${day}/data.txt`);
-    return await fs.readFile(filePath, { encoding: "utf8" });
-};
+    const data = await fs.readFile(dataPath, "utf8");
+    const solution = await import(dirPath);
+
+    console.timeEnd("File load time");
+    console.time("Solution run time");
+
+    const output = solution.default(data);
+
+    console.timeEnd("Solution run time");
+    console.log("Results:");
+    console.log(output);
+}
 
 (async () => {
     const options = yargs(process.argv.slice(2))
@@ -26,14 +32,5 @@ const loadData = async (rawDay: number): Promise<string> => {
             demandOption: true,
         }).argv;
 
-    const day = parseInt(options.day);
-    const rawData = await loadData(day);
-    const solution = solutions[day - 1];
-
-    console.log(`Running Day ${day} solutions`);
-    console.time(`Day ${day} complete, elapsed time`);
-
-    solution(rawData);
-
-    console.timeEnd(`Day ${day} complete, elapsed time`);
+    await runSolution(parseInt(options.day));
 })();
