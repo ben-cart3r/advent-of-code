@@ -20,7 +20,7 @@ const runSolution = async (day: number) => {
     console.timeEnd("Solution run time");
     console.log("Results:");
     console.log(output);
-}
+};
 
 (async () => {
     const options = yargs(process.argv.slice(2))

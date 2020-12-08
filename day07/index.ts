@@ -4,19 +4,19 @@ type Rule = {
     contents: Array<{
         name: string;
         amount: number;
-    }>
-}
+    }>;
+};
 
 const parseRule = (rule: string): Rule => {
     const [name, contents] = rule.split("contain");
 
     const formattedName = name.substring(0, name.indexOf(" bags"));
 
-    if(rule.includes("contain no other bags.")) {
+    if (rule.includes("contain no other bags.")) {
         return {
             name: formattedName,
-            contents: []
-        }
+            contents: [],
+        };
     }
 
     const types = contents.split(",").map((bagType) => {
@@ -24,19 +24,19 @@ const parseRule = (rule: string): Rule => {
         const name = nameParts.join(" ");
         return {
             amount: parseInt(quantity),
-            name: name.substring(0, name.indexOf(" bag"))
-        }
+            name: name.substring(0, name.indexOf(" bag")),
+        };
     });
 
     return {
         name: formattedName,
-        contents: types
+        contents: types,
     };
-}
+};
 
 const parseRules = (input: string) => {
     return input.trim().split("\n").map(parseRule);
-}
+};
 
 const solver1 = (input: string): number => {
     const rules = parseRules(input);
@@ -46,14 +46,14 @@ const solver1 = (input: string): number => {
         const rule = rules.find((rule) => rule.name == bagType);
 
         // Exit condition, stop when "shiny gold" bag is found
-        if (rule.contents.find(bagType => bagType.name == "shiny gold")) {
+        if (rule.contents.find((bagType) => bagType.name == "shiny gold")) {
             return true;
         }
 
         return rule.contents.reduce((acc, rule) => {
             return acc || checkBag(rule.name);
         }, false);
-    }
+    };
 
     // Count number of bags containing a "shiny gold" bag
     return rules.reduce((acc, rule) => {
@@ -71,16 +71,18 @@ const solver2 = (input: string): number => {
     // Recursively count bags inside a "shiny gold" bag
     const countBags = (bagType: string): number => {
         const rule = rules.find((rule) => rule.name == bagType);
-        
+
         // Exit condition, return 0 if no more "inner" bags
-        if(rule.contents.length == 0) {
+        if (rule.contents.length == 0) {
             return 0;
         }
 
         return rule.contents.reduce((acc, bagType) => {
-            return acc + bagType.amount + bagType.amount * countBags(bagType.name);
+            return (
+                acc + bagType.amount + bagType.amount * countBags(bagType.name)
+            );
         }, 0);
-    }
+    };
 
     return countBags("shiny gold");
 };

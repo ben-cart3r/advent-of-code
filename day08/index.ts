@@ -2,92 +2,91 @@ type Instruction = {
     operation: string;
     argument: string;
     visits: number;
-}
+};
 
 const parseInstructions = (input: string): Array<Instruction> => {
-    return input.trim().split("\n").map((instruction) => {
-        const [operation, argument] = instruction.split(" ");
-        return {
-            operation,
-            argument,
-            visits: 0
-        };
-    });
-}
+    return input
+        .trim()
+        .split("\n")
+        .map((instruction) => {
+            const [operation, argument] = instruction.split(" ");
+            return {
+                operation,
+                argument,
+                visits: 0,
+            };
+        });
+};
+
+const runInstruction = (
+    instructions: Array<Instruction>,
+    pointer: number,
+    accumulator: number
+): [number, number] => {
+    switch (instructions[pointer].operation) {
+        case "nop":
+            pointer++;
+            break;
+        case "acc":
+            accumulator += parseInt(instructions[pointer].argument);
+            pointer++;
+            break;
+        case "jmp":
+            pointer += parseInt(instructions[pointer].argument);
+            break;
+    }
+
+    return [pointer, accumulator];
+};
+
+const runProgram = (instructions: Array<Instruction>): [number, number] => {
+    const seen = new Set();
+    let pointer = 0;
+    let accumulator = 0;
+
+    while (pointer < instructions.length) {
+        if (seen.has(pointer)) {
+            break;
+        }
+
+        seen.add(pointer);
+
+        [pointer, accumulator] = runInstruction(
+            instructions,
+            pointer,
+            accumulator
+        );
+    }
+
+    return [pointer, accumulator];
+};
 
 const solver1 = (input: string): number => {
     const instructions = parseInstructions(input);
-    let counter = 0;
-    let accumulator = 0;
-
-    while (counter < instructions.length && instructions[counter].visits == 0) {
-        instructions[counter].visits += 1;
-
-        switch (instructions[counter].operation) {
-            case "nop":
-                counter++;
-                break;
-            case "acc":
-                accumulator += parseInt(instructions[counter].argument);
-                counter++;
-                break;
-            case "jmp":
-                counter += parseInt(instructions[counter].argument);
-                break;
-        }
-    }
-
+    const [, accumulator] = runProgram(instructions);
 
     return accumulator;
 };
 
-// Ugly brute force - maybe it can be done better
 const solver2 = (input: string): number => {
     const instructions = parseInstructions(input);
 
-    for (let i = 0; i < instructions.length; ++i) {        
-        // Reset instructions
-        for (let j = 0; j < instructions.length; ++j) {
-            instructions[j].visits = 0;
+    for (let i = 0; i < instructions.length; ++i) {
+        const op = instructions[i].operation;
+
+        if (instructions[i].operation == "jmp") {
+            instructions[i].operation = "nop";
+        } else if (instructions[i].operation == "nop") {
+            instructions[i].operation = "jmp";
         }
 
-        if (["jmp", "nop"].includes(instructions[i].operation)) {
-            const origOp = instructions[i].operation;
-            let idx = 0;
-            let accumulator = 0;
-            
-            // Switch operation
-            if (instructions[i].operation == "jmp") {
-                instructions[i].operation = "nop";
-            }
-            else {
-                instructions[i].operation = "jmp";
-            }
+        const [pointer, accumulator] = runProgram(instructions);
 
-            // Test
-            while (idx < instructions.length && instructions[idx].visits == 0) {
-                instructions[idx].visits += 1;
+        if (pointer == instructions.length) {
+            return accumulator;
+        }
 
-                switch (instructions[idx].operation) {
-                    case "nop":
-                        idx++;
-                        break;
-                    case "acc":
-                        accumulator += parseInt(instructions[idx].argument);
-                        idx++;
-                        break;
-                    case "jmp":
-                        idx += parseInt(instructions[idx].argument);
-                        break;
-                }
-            }
-
-            if (idx == instructions.length) {
-                return accumulator;
-            }
-
-            instructions[i].operation = origOp;
-        }        
+        instructions[i].operation = op;
     }
 
     return 0;
