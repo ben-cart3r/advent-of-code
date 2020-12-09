@@ -1,7 +1,6 @@
 type Instruction = {
     operation: string;
     argument: string;
-    visits: number;
 };
 
 const parseInstructions = (input: string): Array<Instruction> => {
@@ -13,7 +12,6 @@ const parseInstructions = (input: string): Array<Instruction> => {
             return {
                 operation,
                 argument,
-                visits: 0,
             };
         });
 };
