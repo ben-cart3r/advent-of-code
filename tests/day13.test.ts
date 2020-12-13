@@ -4,7 +4,7 @@ const sampleData = `939
 7,13,x,x,59,x,31,19`;
 
 const sampleData2 = `939
-67,7,59,61`
+67,7,59,61`;
 
 describe("day13", () => {
     describe("part1", () => {

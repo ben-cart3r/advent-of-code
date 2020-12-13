@@ -1,12 +1,14 @@
 const parseInput = (input: string): Array<[string, number]> => {
-    return input.trim().split("\n").map((row) => {
-        const dir = row.substring(0,1);
-        const amount = parseInt(row.substring(1));
+    return input
+        .trim()
+        .split("\n")
+        .map((row) => {
+            const dir = row.substring(0, 1);
+            const amount = parseInt(row.substring(1));
 
-        return [dir, amount]
-    });
-}
-
+            return [dir, amount];
+        });
+};
 
 const solver1 = (input: string): number => {
     const directions = parseInput(input);
@@ -17,33 +19,33 @@ const solver1 = (input: string): number => {
     const rotate = (amount: number) => {
         heading += amount;
 
-        if(heading < 0) {
+        if (heading < 0) {
             heading = 360 + heading;
         }
 
         heading = heading % 360;
-    }
+    };
 
     const forward = (amount: number) => {
-        if(heading == 90) {
+        if (heading == 90) {
             east += amount;
         }
 
-        if(heading == 180) {
+        if (heading == 180) {
             north -= amount;
         }
 
-        if(heading == 270) {
+        if (heading == 270) {
             east -= amount;
         }
 
-        if(heading == 0) {
+        if (heading == 0) {
             north += amount;
         }
-    }
+    };
 
     for (let i = 0; i < directions.length; ++i) {
-        switch(directions[i][0]) {
+        switch (directions[i][0]) {
             case "N":
                 north += directions[i][1];
                 break;
@@ -73,29 +75,29 @@ const solver1 = (input: string): number => {
 
 const solver2 = (input: string): number => {
     const directions = parseInput(input);
-    const s = {x: 0, y: 0};
-    const wp = {x: 10, y:1 };
-    
+    const s = { x: 0, y: 0 };
+    const wp = { x: 10, y: 1 };
+
     const rotate = (angle: number) => {
-        const sin = Math.sin(angle * Math.PI / 180);
-        const cos = Math.cos(angle * Math.PI / 180);
-      
+        const sin = Math.sin((angle * Math.PI) / 180);
+        const cos = Math.cos((angle * Math.PI) / 180);
+
         // rotate point
         const wpx = wp.x * cos - wp.y * sin;
         const wpy = wp.x * sin + wp.y * cos;
-      
+
         // translate point back:
         wp.x = Math.round(wpx);
         wp.y = Math.round(wpy);
-    }
+    };
 
     const forward = (amount: number) => {
         s.x += wp.x * amount;
         s.y += wp.y * amount;
-    }
+    };
 
     for (let i = 0; i < directions.length; ++i) {
-        switch(directions[i][0]) {
+        switch (directions[i][0]) {
             case "N":
                 wp.y += directions[i][1];
                 break;
