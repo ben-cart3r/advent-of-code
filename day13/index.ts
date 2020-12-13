@@ -86,23 +86,13 @@ const solver2 = (input: string): BigInt => {
     }, initial);
 
     // Product of bus ids
-    const N = numbers.reduce(
-        (acc, bus) => (console.log(acc), (acc *= BigInt(bus[0]))),
-        BigInt(1)
-    );
+    const N = numbers.reduce((acc, bus) => (acc *= BigInt(bus[0])), BigInt(1));
     let ans = 0n;
 
     for (let i = 0; i < numbers.length; ++i) {
         const [bus, idx] = numbers[i];
         const ni = N / BigInt(bus);
         const mi = modInverse(ni, BigInt(bus));
-
-        console.log(
-            `(${idx}*${mi}*${ni})%${bus}=${idx} -- ${
-                (BigInt(idx) * mi * ni) % BigInt(bus) == BigInt(idx)
-            }`
-        );
-
         ans += BigInt(idx) * mi * ni;
     }
 
@@ -115,6 +105,6 @@ export default (input: string): string => {
     const result1 = solver1(input);
     const result2 = solver2(input);
 
-    return `\t Part 1 result: ${result1}
-    \t Part 2 result: ${result2}`;
+    return `\t Part 1 result: ${result1.toString()}
+    \t Part 2 result: ${result2.toString()}`;
 };

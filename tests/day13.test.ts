@@ -11,7 +11,7 @@ describe("day13", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);
 
-            expect(result).toEqual(295);
+            expect(result.toString()).toEqual("295");
         });
     });
 
@@ -19,7 +19,7 @@ describe("day13", () => {
         it("should solve for sample data", () => {
             const result = solver2(sampleData2);
 
-            expect(result).toEqual(754018);
+            expect(result.toString()).toEqual("754018");
         });
     });
 });
