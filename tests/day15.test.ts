@@ -11,11 +11,12 @@ describe("day15", () => {
         });
     });
 
-    describe("part2", () => {
-        it("should solve for sample data", () => {
-            const result = solver2(sampleData);
+    // Slow
+    // describe("part2", () => {
+    //     it("should solve for sample data", () => {
+    //         const result = solver2(sampleData);
 
-            expect(result).toEqual(175594);
-        });
-    });
+    //         expect(result).toEqual(175594);
+    //     });
+    // });
 });
