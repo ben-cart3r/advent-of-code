@@ -1,8 +1,10 @@
 
 type Tile = {
     id: number;
+    content: string;
     sides: Array<string>
     reversedSides: Array<string>
+    neighbours: Array<Tile>
 }
 
 const reverseString = (str: string): string => {
@@ -25,6 +27,7 @@ const parse = (input: string): Array<Tile> => {
 
         return {
             id,
+            content: rows.join("\n"),
             sides: [
                 top,
                 bottom,
@@ -36,29 +39,32 @@ const parse = (input: string): Array<Tile> => {
                 reverseString(bottom),
                 reverseString(left),
                 reverseString(right),
-            ]
+            ],
+            neighbours: []
         };
     });
 }
 
+// Check if 2 tiles have a matching side
+const hasMatchingSide = (tile1: Tile, tile2: Tile): boolean => {
+    for (let i = 0; i < tile1.sides.length; ++i) {
+        // Check if sides match when rearranged
+        if (tile2.sides.includes(tile1.sides[i])) {
+            return true;
+        }
+
+        // Check if sides match when rotated / flipped
+        if (tile2.sides.includes(tile1.reversedSides[i])) {
+            return true;
+        }
+    } 
+
+    return false;
+}
+
+
+
 const solver1 = (input: string): number => {
-    
-    // Check if 2 tiles have a matching side
-    const hasMatchingSide = (tile1: Tile, tile2: Tile): boolean => {
-        for (let i = 0; i < tile1.sides.length; ++i) {
-            // Check if sides match when rearranged
-            if (tile2.sides.includes(tile1.sides[i])) {
-                return true;
-            }
-
-            // Check if sides match when rotated / flipped
-            if (tile2.sides.includes(tile1.reversedSides[i])) {
-                return true;
-            }
-        } 
-
-        return false;
-    }
 
     // Count how many tiles match at least 1 side of a tile
     const countMatchingSides = (tile: Tile, tiles: Array<Tile>): number => {
@@ -74,7 +80,7 @@ const solver1 = (input: string): number => {
             return acc;
         }, 0);
     }
-
+    
     // If a tile matches exactly 2 other tiles then it must be a corner
     const isCorner = (tile: Tile, tiles: Array<Tile>) => {
         return countMatchingSides(tile, tiles) == 2;
@@ -88,12 +94,172 @@ const solver1 = (input: string): number => {
 }
 
 const solver2 = (input: string) => {
+
+    const findNeighbours = (tile: Tile, tiles: Array<Tile>): Tile => {
+        const neighbours = tiles.filter((testTile) => {
+            if (tile.id == testTile.id) {
+                return false;
+            }
+            
+            if (hasMatchingSide(tile, testTile)) {
+                return true;
+            }
+
+            return false;
+        });
+
+        return {
+            ...tile,
+            neighbours: neighbours
+        };
+    }
+
+    const tiles = parse(input); 
+    const tilesWithNeighbours = tiles.map((t) => findNeighbours(t, tiles));
+    const corners = tilesWithNeighbours.filter((t) => t.neighbours.length == 2);
+
+    // console.log(corners[0].content);
+    // console.log()
+    // console.log(corners[0].neighbours[0].content);
+
+    const r1 = corners[0].content.split("\n");
+    const r2 = corners[0].neighbours[0].content.split("\n");
+
+    for (let i = 0; i < r1.length; ++i) {
+        console.log(r1[i] + " " + r2[i]);
+    }
+
+    console.log(corners[0].neighbours[1].content);
+
+    // const grid: Array<Array<Tile>> = Array(12).fill(null).map(_ => Array(12));
+
+    // grid[0][0] = corners[0];
+
+    // //grid[0][1] = corners[0].neighbours[0];
+    // grid[1][0] = corners[0].neighbours[1];
+
+
+
+    // console.log(grid[0][0].id);
+
     return 0;
 }
 
 export { solver1, solver2 };
 
 export default (input: string): string => {
+    const sample = `Tile 2311:
+..##.#..#.
+##..#.....
+#...##..#.
+####.#...#
+##.##.###.
+##...#.###
+.#.#.#..##
+..#....#..
+###...#.#.
+..###..###
+
+Tile 1951:
+#.##...##.
+#.####...#
+.....#..##
+#...######
+.##.#....#
+.###.#####
+###.##.##.
+.###....#.
+..#.#..#.#
+#...##.#..
+
+Tile 1171:
+####...##.
+#..##.#..#
+##.#..#.#.
+.###.####.
+..###.####
+.##....##.
+.#...####.
+#.##.####.
+####..#...
+.....##...
+
+Tile 1427:
+###.##.#..
+.#..#.##..
+.#.##.#..#
+#.#.#.##.#
+....#...##
+...##..##.
+...#.#####
+.#.####.#.
+..#..###.#
+..##.#..#.
+
+Tile 1489:
+##.#.#....
+..##...#..
+.##..##...
+..#...#...
+#####...#.
+#..#.#.#.#
+...#.#.#..
+##.#...##.
+..##.##.##
+###.##.#..
+
+Tile 2473:
+#....####.
+#..#.##...
+#.##..#...
+######.#.#
+.#...#.#.#
+.#########
+.###.#..#.
+########.#
+##...##.#.
+..###.#.#.
+
+Tile 2971:
+..#.#....#
+#...###...
+#.#.###...
+##.##..#..
+.#####..##
+.#..####.#
+#..#.#..#.
+..####.###
+..#.#.###.
+...#.#.#.#
+
+Tile 2729:
+...#.#.#.#
+####.#....
+..#.#.....
+....#..#.#
+.##..##.#.
+.#.####...
+####.#.#..
+##.####...
+##..#.##..
+#.##...##.
+
+Tile 3079:
+#.#.#####.
+.#..######
+..#.......
+######....
+####.#..#.
+.#...#.##.
+#.#####.##
+..#.###...
+..#.......
+..#.###...`;
+
+    solver2(sample);
+    
+    return "";
+    
     const result1 = solver1(input);
     const result2 = solver2(input);
 
