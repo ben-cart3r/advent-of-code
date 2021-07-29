@@ -5,6 +5,7 @@
     "main": "index.js",
     "devDependencies": {
         "@types/jest": "^26.0.15",
+        "@types/winston": "^2.4.4",
         "@typescript-eslint/eslint-plugin": "^4.9.0",
         "@typescript-eslint/parser": "^4.9.0",
         "eslint": "^7.14.0",
@@ -28,5 +29,8 @@
     "bugs": {
         "url": "https://github.com/ben-cart3r/advent-of-code-2020/issues"
     },
-    "homepage": "https://github.com/ben-cart3r/advent-of-code-2020#readme"
+    "homepage": "https://github.com/ben-cart3r/advent-of-code-2020#readme",
+    "dependencies": {
+        "winston": "^3.3.3"
+    }
 }
