@@ -54,26 +54,23 @@ const solver2 = (input: string): number => {
     const [deck1, deck2] = parse(input);
     let gameId = 0;
 
-    const play = (deck1: Array<number>, deck2: Array<number>) => {
-        gameId++;
-        
+    const play = (deck1: Deck, deck2: Deck) => {
+        const thisGameId = ++gameId;
         const previousRounds: DeckStore = [];
 
-        logger.debug(`\n=== Game ${gameId} ===`)
+        logger.debug(`\n=== Game ${thisGameId} ===`)
 
         while (deck1.length > 0 && deck2.length > 0) {
-
             // Check if state appeared previously
             if (isPreviousState(previousRounds, deck1, deck2)) {
                 // Player 1 wins
                 return [deck1, []];
             }
-            else {
-                // Push a shallow copy of the current decks to previous state store
-                previousRounds.push([[...deck1], [...deck2]]);
-            }
 
-            logger.debug(`-- Round ${previousRounds.length} (Game ${gameId}) --`);
+            // Push a shallow copy of the current decks to previous state store
+            previousRounds.push([[...deck1], [...deck2]]);
+
+            logger.debug(`-- Round ${previousRounds.length} (Game ${thisGameId}) --`);
             logger.debug(`Player 1's deck (${deck1.length}): ${deck1.join(",")}`)
             logger.debug(`Player 2's deck (${deck2.length}): ${deck2.join(",")}`)
 
@@ -84,29 +81,31 @@ const solver2 = (input: string): number => {
             logger.debug(`Player 2 plays: ${card2}`)
     
             if (card1 <= deck1.length && card2 <= deck2.length) {
-                const [d1, d2] = play(deck1.slice(card1), deck2.slice(card2));
+                const newD1 = deck1.filter((_, idx) => idx < card1);
+                const newD2 = deck2.filter((_, idx) => idx < card2);
+                const [d1] = play(newD1, newD2);
 
                 if (d1.length > 0) {
                     deck1.push(card1);
                     deck1.push(card2);
-                    logger.debug(`Player 1 wins round ${previousRounds.length} of game ${gameId}!`);
+                    logger.debug(`Player 1 wins round ${previousRounds.length} of game ${thisGameId}!`);
                 }
                 else {
                     deck2.push(card2);
                     deck2.push(card1);
-                    logger.debug(`Player 2 wins round ${previousRounds.length} of game ${gameId}!`);
+                    logger.debug(`Player 2 wins round ${previousRounds.length} of game ${thisGameId}!`);
                 }
             }
             else {
                 if (card1 > card2) {
                     deck1.push(card1);
                     deck1.push(card2);
-                    logger.debug(`Player 1 wins round ${previousRounds.length} of game ${gameId}!`);
+                    logger.debug(`Player 1 wins round ${previousRounds.length} of game ${thisGameId}!`);
                 }
                 else {
                     deck2.push(card2);
                     deck2.push(card1);
-                    logger.debug(`Player 2 wins round ${previousRounds.length} of game ${gameId}!`);
+                    logger.debug(`Player 2 wins round ${previousRounds.length} of game ${thisGameId}!`);
                 }
             }
         }
