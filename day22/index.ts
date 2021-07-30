@@ -50,11 +50,18 @@ const solver1 = (input: string): number => {
     return calcDeckScore(deck1.length > 0 ? deck1 : deck2);
 }
 
+// This solution works but only after converting to JS and running with a larger heap size
+// Need to investigate mem usage
+// node --max-old-space-size=7168 runner.js --day 22
 const solver2 = (input: string): number => {
     const [deck1, deck2] = parse(input);
     let gameId = 0;
 
     const play = (deck1: Deck, deck2: Deck) => {
+        if (gameId > 24334) {
+            throw "Stop"
+        }
+
         const thisGameId = ++gameId;
         const previousRounds: DeckStore = [];
 
