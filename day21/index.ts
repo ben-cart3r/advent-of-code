@@ -1,4 +1,4 @@
-import { difference, intersect, union, unique} from "../helpers";
+import { difference, intersect, union, unique } from "../helpers";
 
 type Food = {
     ingredients: Array<string>
@@ -32,7 +32,7 @@ const getHarmfulIngredients = (foods: Array<Food>, allergens: Array<string>): Ar
                     acc = new Set(food.ingredients);
                 }
                 else {
-                    acc = intersect(acc, new Set(food.ingredients));
+                    acc = intersect(...[acc, new Set(food.ingredients)]);
                 }
             }
             return acc;
@@ -58,62 +58,25 @@ const getHarmfulIngredients = (foods: Array<Food>, allergens: Array<string>): Ar
 }
 
 const solver1 = (input: string): number => {
-
-    const foods = parse(input);
-    const uniqueAllergens = getUniqueAllergens(foods);
-    const allIngredients = getAllIngredients(foods);
-
-    let potentialIngredients = uniqueAllergens.map((allergen) => {
-        return foods.reduce((acc, food) => {
-            if (food.allergens.includes(allergen)) {
-                if (acc == null) {
-                    acc = new Set(food.ingredients);
-                }
-                else {
-                    acc = intersect(acc, new Set(food.ingredients));
-                }
-            }
-            return acc;
-        }, null as Set<string>)
-    });
-
-    for (let i = 0; i < potentialIngredients.length; ++i) {
-        if ([...potentialIngredients[i]].length == 1) {
-            potentialIngredients = potentialIngredients.map((s, j) => {
-                if (i == j) {
-                    return s;
-                }
-                else {
-                    return difference(s, potentialIngredients[i]);
-                }
-            });
-        }
-    }    
-
-    const harmfulIngredients = union(...potentialIngredients);
-    const result = allIngredients.filter((item) => !harmfulIngredients.has(item)).length;
-
-   return result;
-}
-
-const solver2 = (input: string): string => {
-
     const foods = parse(input);
     const uniqueAllergens = getUniqueAllergens(foods);
     const harmfulIngredients = getHarmfulIngredients(foods, uniqueAllergens);
+    const allIngredients = getAllIngredients(foods);
+    const nonAllergenIngredients = allIngredients.filter((item) => !harmfulIngredients.includes(item)).length;
 
-    const allegrenIngredientMap = uniqueAllergens.map((allergen, i) => ({
-        allergen,
-        ingredient: harmfulIngredients[i]
-    }));
+   return nonAllergenIngredients;
+}
 
-    allegrenIngredientMap.sort((a, b) => {
-        return a.allergen > b.allergen ? 1 : b.allergen > a.allergen ? -1 : 0;
+const solver2 = (input: string): string => {
+    const foods = parse(input);
+    const uniqueAllergens = getUniqueAllergens(foods);
+    const harmfulIngredients = getHarmfulIngredients(foods, uniqueAllergens);
+    const sortedAllergens = [...uniqueAllergens].sort();
+    const sortedIngredients = sortedAllergens.map((allergen) => {
+        return harmfulIngredients[uniqueAllergens.indexOf(allergen)];
     });
 
-    const result = allegrenIngredientMap.map((a) => a.ingredient).join(",");
-
-    return result;
+    return sortedIngredients.join(",");
 }
 
 export { solver1, solver2 };
