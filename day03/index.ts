@@ -1,15 +1,14 @@
+import { flatten } from "../helpers";
+
 type Map = {
     height: number;
     map: Array<string>;
     width: number;
 };
 
-const parseMap = (rawMap: string): Map => {
-    const rows = rawMap.split("\n");
-    const map = rows.reduce(
-        (acc, row) => [...acc, ...row.split("")],
-        [] as Array<string>
-    );
+const parse = (input: string): Map => {
+    const rows = input.split("\n");
+    const map = flatten(rows.map(row => row.split("")));
     const width = rows[0].length;
     const height = rows.length;
 
@@ -41,7 +40,7 @@ const traverseMap = (input: Map, pattern: [number, number]): number => {
 };
 
 const solver1 = (input: string): number => {
-    const map = parseMap(input);
+    const map = parse(input);
     return traverseMap(map, [3, 1]);
 };
 
@@ -53,7 +52,7 @@ const solver2 = (input: string): number => {
         [7, 1],
         [1, 2],
     ];
-    const map = parseMap(input);
+    const map = parse(input);
     return traversalPatterns.reduce((acc, pattern) => {
         return acc * traverseMap(map, pattern);
     }, 1);

@@ -20,7 +20,11 @@ export const difference = <T>(set1: Set<T>, set2: Set<T>): Set<T> => {
     return new Set([...set1].filter(item => !set2.has(item)));
 }
 
-export const inRange = (x: number, min: number, max: number) => {
+export const flatten = <T>(input: Array<Array<T>>): Array<T> => {
+    return input.reduce((acc, row) => [...acc, ...row], [] as Array<T>)
+}
+
+export const inRange = (x: number, min: number, max: number): boolean => {
     if (isNaN(x)) {
         return false;
     }
