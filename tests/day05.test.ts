@@ -1,6 +1,8 @@
 import { solver1 } from "../day05";
 
-const sampleData = ["BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"];
+const sampleData = `BFFFBBFRRR
+FFFBBBFRRR
+BBFFBBFRLL`;
 
 describe("day05", () => {
     describe("part1", () => {
