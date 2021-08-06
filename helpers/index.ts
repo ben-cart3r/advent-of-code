@@ -20,6 +20,14 @@ export const difference = <T>(set1: Set<T>, set2: Set<T>): Set<T> => {
     return new Set([...set1].filter(item => !set2.has(item)));
 }
 
+export const inRange = (x: number, min: number, max: number) => {
+    if (isNaN(x)) {
+        return false;
+    }
+
+    return x >= min && x <= max;
+}
+
 export const intersect = <T>(...args: Array<Set<T>>): Set<T> => {
     return args.reduce(
         (acc, set) => {
@@ -49,4 +57,8 @@ export const union = <T>(...args: Array<Set<T>>): Set<T> => {
 
 export const unique = <T>(arr: Array<T>): Array<T> => {
     return [...(new Set([...arr]))];
+}
+
+export const xor = (a: boolean, b: boolean): boolean => {
+    return Boolean(+a ^ +b);
 }

@@ -1,52 +1,66 @@
-const parsePassword = (password: string) => {
-    const [definition, pwd] = password.split(":");
-    const [range, letter] = definition.split(" ");
+import { inRange, xor } from "../helpers";
+
+type PasswordPolicy = {
+    character: string;
+    min: number;
+    max: number;
+};
+
+const parsePolicy = (input: string): PasswordPolicy => {
+    const [range, character] = input.split(" ");
     const [min, max] = range.split("-");
 
     return {
-        letter,
+        character,
         min: parseInt(min),
-        max: parseInt(max),
-        pwd,
+        max: parseInt(max)
     };
-};
+}
 
-const solver1 = (input: Array<string>): number => {
-    return input.reduce((acc, password) => {
-        const { letter, min, max, pwd } = parsePassword(password);
+const parse = (input: string): Array<[string, PasswordPolicy]> => {
+    return input.split("\n").map((line) => {
+        const [policy, password] = line.split(": ");
 
-        const matches = pwd.match(new RegExp(letter, "g"));
-        const count = matches ? matches.length : 0;
+        return [password, parsePolicy(policy)];
+    });
+}; 
 
-        if (count >= min && count <= max) {
-            return acc + 1;
-        }
+const validatePassword = (password: string, policy: PasswordPolicy, part1: boolean): boolean => {
+    if (part1) {
+        const matches = password.match(new RegExp(policy.character, "g"));
+        const characterCount = matches ? matches.length : 0;
+    
+        return inRange(characterCount, policy.min, policy.max);
+    }
+    else {
+        const match1 = password[policy.min - 1] == policy.character;
+        const match2 = password[policy.max - 1] == policy.character;
+    
+        return xor(match1, match2);
+    }  
+}
 
-        return acc;
-    }, 0);
-};
+const solver1 = (input: string): number => {
+    const passwords = parse(input);
+    const validPasswords = passwords.filter(
+        ([password, policy]) => validatePassword(password, policy, true)
+    );
 
-const solver2 = (input: Array<string>): number => {
-    return input.reduce((acc, password) => {
-        const { letter, min, max, pwd } = parsePassword(password);
+    return validPasswords.length;
+}
 
-        const firstMatch = pwd[min] == letter;
-        const secondMatch = pwd[max] == letter;
+const solver2 = (input: string): number => {
+    const passwords = parse(input);
+    const validPasswords = passwords.filter(
+        ([password, policy]) => validatePassword(password, policy, false)
+    );
 
-        // XOR
-        if (+firstMatch ^ +secondMatch) {
-            return acc + 1;
-        }
-
-        return acc;
-    }, 0);
-};
+    return validPasswords.length;
+}
 
 export { solver1, solver2 };
 
-export default (rawData: string): string => {
-    const input = rawData.split("\n");
-
+export default (input: string): string => {
     const result1 = solver1(input);
     const result2 = solver2(input);
 
