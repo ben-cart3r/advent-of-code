@@ -1,97 +1,95 @@
-const parsePassport = (input: string): { [k: string]: string } => {
-    return input
-        .split("\n")
-        .join(" ")
-        .split(" ")
-        .reduce((acc, field) => {
-            const [key, value] = field.split(":");
+import { compareArrays, inRange, isHex, isNumber } from "../helpers";
 
-            return {
-                ...acc,
-                [key]: value,
-            };
-        }, {});
+const passportFields = ["byr", "ecl", "eyr", "hcl", "hgt", "iyr", "pid"];
+const eyeColours = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
+
+const parse = (input: string): Array<Map<string, string>> => {
+    return input.split("\n\n").map((data) => {
+        return data.split(/\s+/).reduce((acc, prop) => {
+            const [key, value] = prop.split(":");
+
+            if (key != "cid") {
+                acc.set(key, value);
+            }
+
+            return acc;
+        }, new Map<string, string>());
+    });
 };
 
-const parsePassports = (input: string): Array<string> => {
-    return input.split("\n\n");
-};
-
-const parseHeight = (height: string): [string, string] => {
-    if (height.indexOf("cm") > -1) {
-        return [height.substring(0, height.indexOf("cm")), "cm"];
+const validateHeight = (height: string): boolean => {
+    if (height.includes("cm")) {
+        return inRange(
+            parseInt(height.substring(0, height.indexOf("cm"))),
+            150,
+            193
+        );
     } else {
-        return [height.substring(0, height.indexOf("in")), "in"];
+        return inRange(
+            parseInt(height.substring(0, height.indexOf("in"))),
+            59,
+            76
+        );
     }
 };
 
-const inRange = (val: string, lLimit: number, uLimit: number) => {
-    return parseInt(val) >= lLimit && parseInt(val) <= uLimit;
+const validatePassport = (
+    passport: Map<string, string>,
+    part2: boolean
+): boolean => {
+    const valid = compareArrays([...passport.keys()].sort(), passportFields);
+
+    if (!part2 || !valid) {
+        return valid;
+    }
+
+    if (!inRange(parseInt(passport.get("byr")), 1920, 2002)) {
+        return false;
+    }
+
+    if (!inRange(parseInt(passport.get("iyr")), 2010, 2020)) {
+        return false;
+    }
+
+    if (!inRange(parseInt(passport.get("eyr")), 2020, 2030)) {
+        return false;
+    }
+
+    if (!validateHeight(passport.get("hgt"))) {
+        return false;
+    }
+
+    if (!isHex(passport.get("hcl"))) {
+        return false;
+    }
+
+    if (!eyeColours.includes(passport.get("ecl"))) {
+        return false;
+    }
+
+    if (!(isNumber(passport.get("pid")) && passport.get("pid").length == 9)) {
+        return false;
+    }
+
+    return true;
 };
 
 const solver1 = (input: string): number => {
-    const passports = parsePassports(input).map(parsePassport);
-    const required = ["ecl", "pid", "eyr", "hcl", "byr", "iyr", "hgt"];
+    const passports = parse(input);
+    const validPassports = passports.filter((passport) =>
+        validatePassport(passport, false)
+    );
 
-    return passports.reduce((acc, passport) => {
-        const keys = Object.keys(passport);
-        const valid = required.every((field) => keys.includes(field));
-
-        return valid ? acc + 1 : acc;
-    }, 0);
+    return validPassports.length;
 };
 
 const solver2 = (input: string): number => {
-    const passports = parsePassports(input).map(parsePassport);
-    const required = ["ecl", "pid", "eyr", "hcl", "byr", "iyr", "hgt"];
+    const passports = parse(input);
+    const validPassports = passports.filter((passport) =>
+        validatePassport(passport, true)
+    );
 
-    return passports.reduce((acc, passport) => {
-        const keys = Object.keys(passport);
-        const hasRequired = required.every((field) => keys.includes(field));
-
-        // Early return if missing a field
-        if (!hasRequired) {
-            return acc;
-        }
-
-        const validBirthYear = inRange(passport.byr, 1920, 2002);
-        const validIssueYear = inRange(passport.iyr, 2010, 2020);
-        const validExpiryYear = inRange(passport.eyr, 2020, 2030);
-
-        const [height, unit] = parseHeight(passport.hgt);
-        const validHeight =
-            unit == "cm" ? inRange(height, 150, 193) : inRange(height, 59, 76);
-
-        const validHairColour =
-            passport.hcl.match(/^#(?:[0-9a-fA-F]{6})$/) != null;
-
-        const validEyeColour = [
-            "amb",
-            "blu",
-            "brn",
-            "gry",
-            "grn",
-            "hzl",
-            "oth",
-        ].includes(passport.ecl);
-
-        const validPassportId =
-            !isNaN(parseInt(passport.pid)) && passport.pid.length == 9;
-
-        if (
-            validBirthYear &&
-            validIssueYear &&
-            validExpiryYear &&
-            validHeight &&
-            validHairColour &&
-            validEyeColour &&
-            validPassportId
-        ) {
-            return acc + 1;
-        }
-
-        return acc;
-    }, 0);
+    return validPassports.length;
 };
 
 export { solver1, solver2 };

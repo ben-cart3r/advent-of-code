@@ -8,7 +8,7 @@ type Map = {
 
 const parse = (input: string): Map => {
     const rows = input.split("\n");
-    const map = flatten(rows.map(row => row.split("")));
+    const map = flatten(rows.map((row) => row.split("")));
     const width = rows[0].length;
     const height = rows.length;
 

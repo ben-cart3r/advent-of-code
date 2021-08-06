@@ -2,7 +2,7 @@ import { product, sum } from "../helpers";
 
 const parse = (input: string): Array<number> => {
     return input.split("\n").map((row) => parseInt(row));
-}
+};
 
 const solver1 = (input: string): number => {
     const entries = parse(input);
@@ -14,7 +14,7 @@ const solver1 = (input: string): number => {
             }
         }
     }
-}
+};
 
 const solver2 = (input: string): number => {
     const entries = parse(input);
@@ -28,7 +28,7 @@ const solver2 = (input: string): number => {
             }
         }
     }
-}
+};
 
 export { solver1, solver2 };
 

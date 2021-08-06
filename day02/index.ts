@@ -13,9 +13,9 @@ const parsePolicy = (input: string): PasswordPolicy => {
     return {
         character,
         min: parseInt(min),
-        max: parseInt(max)
+        max: parseInt(max),
     };
-}
+};
 
 const parse = (input: string): Array<[string, PasswordPolicy]> => {
     return input.split("\n").map((line) => {
@@ -23,40 +23,43 @@ const parse = (input: string): Array<[string, PasswordPolicy]> => {
 
         return [password, parsePolicy(policy)];
     });
-}; 
+};
 
-const validatePassword = (password: string, policy: PasswordPolicy, part1: boolean): boolean => {
+const validatePassword = (
+    password: string,
+    policy: PasswordPolicy,
+    part1: boolean
+): boolean => {
     if (part1) {
         const matches = password.match(new RegExp(policy.character, "g"));
         const characterCount = matches ? matches.length : 0;
-    
+
         return inRange(characterCount, policy.min, policy.max);
-    }
-    else {
+    } else {
         const match1 = password[policy.min - 1] == policy.character;
         const match2 = password[policy.max - 1] == policy.character;
-    
+
         return xor(match1, match2);
-    }  
-}
+    }
+};
 
 const solver1 = (input: string): number => {
     const passwords = parse(input);
-    const validPasswords = passwords.filter(
-        ([password, policy]) => validatePassword(password, policy, true)
+    const validPasswords = passwords.filter(([password, policy]) =>
+        validatePassword(password, policy, true)
     );
 
     return validPasswords.length;
-}
+};
 
 const solver2 = (input: string): number => {
     const passwords = parse(input);
-    const validPasswords = passwords.filter(
-        ([password, policy]) => validatePassword(password, policy, false)
+    const validPasswords = passwords.filter(([password, policy]) =>
+        validatePassword(password, policy, false)
     );
 
     return validPasswords.length;
-}
+};
 
 export { solver1, solver2 };
 
