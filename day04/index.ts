@@ -1,9 +1,11 @@
 import { compareArrays, inRange, isHex, isNumber } from "../helpers";
 
+type Passport = Map<string, string>;
+
 const passportFields = ["byr", "ecl", "eyr", "hcl", "hgt", "iyr", "pid"];
 const eyeColours = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
 
-const parse = (input: string): Array<Map<string, string>> => {
+const parse = (input: string): Array<Passport> => {
     return input.split("\n\n").map((data) => {
         return data.split(/\s+/).reduce((acc, prop) => {
             const [key, value] = prop.split(":");
@@ -13,7 +15,7 @@ const parse = (input: string): Array<Map<string, string>> => {
             }
 
             return acc;
-        }, new Map<string, string>());
+        }, new Map() as Passport);
     });
 };
 
@@ -33,10 +35,7 @@ const validateHeight = (height: string): boolean => {
     }
 };
 
-const validatePassport = (
-    passport: Map<string, string>,
-    part2: boolean
-): boolean => {
+const validatePassport = (passport: Passport, part2: boolean): boolean => {
     const valid = compareArrays([...passport.keys()].sort(), passportFields);
 
     if (!part2 || !valid) {
