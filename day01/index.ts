@@ -1,39 +1,38 @@
-const solver1 = (input: Array<number>): number => {
-    for (let i = 0; i < input.length; ++i) {
-        for (let j = 0; j < input.length; ++j) {
-            if (i != j && input[i] + input[j] == 2020) {
-                return input[i] * input[j];
+import { product, sum } from "../helpers";
+
+const parse = (input: string): Array<number> => {
+    return input.split("\n").map((row) => parseInt(row));
+}
+
+const solver1 = (input: string): number => {
+    const entries = parse(input);
+
+    for (const num1 of entries) {
+        for (const num2 of entries) {
+            if (sum(num1, num2) == 2020) {
+                return product(num1, num2);
             }
         }
     }
+}
 
-    return null;
-};
+const solver2 = (input: string): number => {
+    const entries = parse(input);
 
-const solver2 = (input: Array<number>): number => {
-    for (let i = 0; i < input.length; ++i) {
-        for (let j = 0; j < input.length; ++j) {
-            for (let k = 0; k < input.length; ++k) {
-                if (
-                    i != j &&
-                    i != k &&
-                    j != k &&
-                    input[i] + input[j] + input[k] == 2020
-                ) {
-                    return input[i] * input[j] * input[k];
+    for (const num1 of entries) {
+        for (const num2 of entries) {
+            for (const num3 of entries) {
+                if (sum(num1, num2, num3) == 2020) {
+                    return product(num1, num2, num3);
                 }
             }
         }
     }
-
-    return null;
-};
+}
 
 export { solver1, solver2 };
 
-export default (rawData: string): string => {
-    const input = rawData.split("\n").map((e) => parseInt(e));
-
+export default (input: string): string => {
     const result1 = solver1(input);
     const result2 = solver2(input);
 

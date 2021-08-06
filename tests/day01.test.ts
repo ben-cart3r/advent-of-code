@@ -1,6 +1,11 @@
 import { solver1, solver2 } from "../day01";
 
-const sampleData = [1721, 979, 366, 299, 675, 1456];
+const sampleData = `1721
+979
+366
+299
+675
+1456`;
 
 describe("day01", () => {
     describe("part1", () => {

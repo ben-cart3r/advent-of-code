@@ -4,7 +4,7 @@ export const compareArrays = <T>(a: Array<T>, b: Array<T>): boolean => {
     return a.length === b.length && a.every((item, index) => item === b[index]);
 }
 
-export const createLogger = (logLevel: string) => {
+export const createLogger = (logLevel: string): winston.Logger => {
     return winston.createLogger({
         level: logLevel,
         format: winston.format.json(),
@@ -30,6 +30,14 @@ export const intersect = <T>(...args: Array<Set<T>>): Set<T> => {
         }, 
         null as Set<T>
     );
+}
+
+export const product = (...args: Array<number>): number => {
+    return args.reduce((acc, num) => acc * num, 1);
+}
+
+export const sum = (...args: Array<number>): number => {
+    return args.reduce((acc, num) => acc + num, 0);
 }
 
 export const union = <T>(...args: Array<Set<T>>): Set<T> => {
