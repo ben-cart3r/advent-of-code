@@ -72,7 +72,7 @@ The repository contains my solutions to the Advent of Code yearly puzzles. My mo
 -   Install pre-commit hooks
 
     ```shell
-    pre-commit --install
+    pre-commit install
     ```
 
 -   Install NPM dependencies

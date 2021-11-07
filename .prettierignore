@@ -1,1 +1,2 @@
 .github/workflows/
+.pre-commit-config.yaml

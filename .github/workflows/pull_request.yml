@@ -2,7 +2,8 @@ name: Test / Validate Code
 
 on:
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - main
 
 jobs:
   test:
@@ -17,7 +18,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
 
