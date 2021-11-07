@@ -2,11 +2,12 @@ import fs from "fs/promises";
 import path from "path";
 import yargs from "yargs";
 
-const runSolution = async (day: number) => {
-    const dirPath = day < 10 ? `./day0${day}` : `./day${day}`;
+const runSolution = async (year: number, day: number) => {
+    const dirName = day < 10 ? `./day0${day}` : `./day${day}`;
+    const dirPath = `${year}/${dirName}`;
     const dataPath = path.join(__dirname, `${dirPath}/data.txt`);
 
-    console.log(`-----------\nDay ${day}\n-----------`);
+    console.log(`-----------\nYear ${year} Day ${day}\n-----------`);
     console.time("File load time");
 
     const data = await fs.readFile(dataPath, "utf8");
@@ -22,9 +23,29 @@ const runSolution = async (day: number) => {
     console.log(output);
 };
 
+const getActiveYear = () => {
+    const date = new Date();
+    const currentMonth = date.getMonth();
+    const currentYear = date.getFullYear();
+
+    // December: return current year
+    if (currentMonth == 11) {
+        return currentYear.toString();
+    }
+
+    // January - November: return last year
+    return (currentYear - 1).toString();
+};
+
 (async () => {
     const options = yargs(process.argv.slice(2))
-        .usage("Usage: $0 -d <day>")
+        .usage("Usage: $0 -y <year> -d <day>")
+        .option("year", {
+            alias: "y",
+            describe: "Year",
+            type: "string",
+            default: getActiveYear(),
+        })
         .option("day", {
             alias: "d",
             describe: "Day",
@@ -32,5 +53,5 @@ const runSolution = async (day: number) => {
             demandOption: true,
         }).argv;
 
-    await runSolution(parseInt(options.day));
+    await runSolution(parseInt(options.year), parseInt(options.day));
 })();
