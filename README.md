@@ -33,6 +33,7 @@
         <li><a href="#pre-commit">Pre-commit</a></li>
         <li><a href="#linting">Linting</a></li>
         <li><a href="#testing">Testing</a></li>
+        <li><a href="#solution-template">Solution template</a></li>
         <li><a href="#running-solutions">Running solutions</a></li>
       </ul>
     </li>
