@@ -1,4 +1,4 @@
-import { solver1 } from "../day05";
+import { solver1 } from ".";
 
 const sampleData = `BFFFBBFRRR
 FFFBBBFRRR

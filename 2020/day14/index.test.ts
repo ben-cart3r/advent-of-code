@@ -1,4 +1,4 @@
-import { solver1, solver2 } from "../day14";
+import { solver1, solver2 } from ".";
 
 const sampleData = `mask = XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X
 mem[8] = 11

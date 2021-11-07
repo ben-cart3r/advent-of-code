@@ -1,4 +1,4 @@
-import { solver1, solver2 } from "../day07";
+import { solver1, solver2 } from ".";
 
 const sampleData = `light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.

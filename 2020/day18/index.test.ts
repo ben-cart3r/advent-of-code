@@ -1,4 +1,4 @@
-import { solver1, solver2 } from "../day18";
+import { solver1, solver2 } from ".";
 
 describe("day18", () => {
     describe("part1", () => {

@@ -1,22 +1,23 @@
-import { solver1, solver2 } from "../day11";
+import { solver1, solver2 } from ".";
 
-const sampleData = `L.LL.LL.LL
-LLLLLLL.LL
-L.L.L..L..
-LLLL.LL.LL
-L.LL.LL.LL
-L.LLLLL.LL
-..L.L.....
-LLLLLLLLLL
-L.LLLLLL.L
-L.LLLLL.LL`;
+const sampleData = `..##.......
+#...#...#..
+.#....#..#.
+..#.#...#.#
+.#...##..#.
+..#.##.....
+.#.#.#....#
+.#........#
+#.##...#...
+#...##....#
+.#..#...#.#`;
 
-describe("day11", () => {
+describe("day03", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);
 
-            expect(result).toEqual(37);
+            expect(result).toEqual(7);
         });
     });
 
@@ -24,7 +25,7 @@ describe("day11", () => {
         it("should solve for sample data", () => {
             const result = solver2(sampleData);
 
-            expect(result).toEqual(26);
+            expect(result).toEqual(336);
         });
     });
 });

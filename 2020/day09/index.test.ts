@@ -1,4 +1,4 @@
-import { solver1, solver2 } from "../day09";
+import { solver1, solver2 } from ".";
 
 const sampleData = `35
 20

@@ -1,25 +1,27 @@
-import { solver1, solver2 } from "../day22";
+import { solver1, solver2 } from ".";
 
-const sampleData = `Player 1:
-9
-2
-6
-3
-1
+const sampleData = `abc
 
-Player 2:
-5
-8
-4
-7
-10`;
+a
+b
+c
 
-describe("day22", () => {
+ab
+ac
+
+a
+a
+a
+a
+
+b`;
+
+describe("day06", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);
 
-            expect(result).toEqual(306);
+            expect(result).toEqual(11);
         });
     });
 
@@ -27,7 +29,7 @@ describe("day22", () => {
         it("should solve for sample data", () => {
             const result = solver2(sampleData);
 
-            expect(result).toEqual(291);
+            expect(result).toEqual(6);
         });
     });
 });

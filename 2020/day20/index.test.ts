@@ -1,4 +1,4 @@
-import { solver1, solver2 } from "../day20";
+import { solver1, solver2 } from ".";
 
 const sampleData = `Tile 2311:
 ..##.#..#.

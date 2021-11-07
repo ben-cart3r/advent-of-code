@@ -1,4 +1,4 @@
-import { part1, part2 } from "./index";
+import { part1, part2 } from ".";
 
 const sampleData = "";
 

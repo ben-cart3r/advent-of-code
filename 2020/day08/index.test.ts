@@ -1,11 +1,16 @@
-import { solver1, solver2 } from "../day21";
+import { solver1, solver2 } from ".";
 
-const sampleData = `mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
-trh fvjkl sbzzf mxmxvkd (contains dairy)
-sqjhc fvjkl (contains soy)
-sqjhc mxmxvkd sbzzf (contains fish)`;
+const sampleData = `nop +0
+acc +1
+jmp +4
+acc +3
+jmp -3
+acc -99
+acc +1
+jmp -4
+acc +6`;
 
-describe("day21", () => {
+describe("day08", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);
@@ -18,7 +23,7 @@ describe("day21", () => {
         it("should solve for sample data", () => {
             const result = solver2(sampleData);
 
-            expect(result).toEqual("mxmxvkd,sqjhc,fvjkl");
+            expect(result).toEqual(8);
         });
     });
 });
