@@ -3,8 +3,8 @@ import path from "path";
 import yargs from "yargs";
 
 const runSolution = async (year: number, day: number) => {
-    const dirName = day < 10 ? `./day0${day}` : `./day${day}`;
-    const dirPath = `${year}/${dirName}`;
+    const dirName = day < 10 ? `day0${day}` : `day${day}`;
+    const dirPath = `./${year}/${dirName}`;
     const dataPath = path.join(__dirname, `${dirPath}/data.txt`);
 
     console.log(`-----------\nYear ${year} Day ${day}\n-----------`);
@@ -16,11 +16,13 @@ const runSolution = async (year: number, day: number) => {
     console.timeEnd("File load time");
     console.time("Solution run time");
 
-    const output = solution.default(data);
+    const output1 = solution.part1(data);
+    const output2 = solution.part2(data);
 
     console.timeEnd("Solution run time");
     console.log("Results:");
-    console.log(output);
+    console.log(`Part 1 result: ${output1}`);
+    console.log(`Part 2 result: ${output2}`);
 };
 
 const getActiveYear = () => {
