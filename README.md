@@ -148,6 +148,20 @@ The repository contains my solutions to the Advent of Code yearly puzzles. My mo
     npm run test -- 2020/day01 -t part1
     ```
 
+### Solution template
+
+-   Create a new directory for the new solution
+
+    ```shell
+    mkdir -p <year>/<day>
+    ```
+
+-   Copy the template to the new directory
+
+    ```
+    cp -r template/ <year>/<day>
+    ```
+
 ### Running solutions
 
 To run a solution for each day, make sure that the input for that days puzzles has been downloaded to the directory for that day. Make sure to save it as data.txt so that it is excluded from source control.
