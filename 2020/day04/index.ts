@@ -1,4 +1,4 @@
-import { compareArrays, inRange, isHex, isNumber } from "../helpers";
+import { compareArrays, inRange, isHex, isNumber } from "../../common";
 
 type Passport = Map<string, string>;
 

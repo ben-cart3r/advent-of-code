@@ -1,4 +1,4 @@
-import { flatten } from "../helpers";
+import { flatten } from "../../common";
 
 type Map = {
     height: number;

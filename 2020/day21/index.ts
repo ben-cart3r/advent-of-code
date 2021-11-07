@@ -1,4 +1,4 @@
-import { difference, intersect, union, unique } from "../helpers";
+import { difference, intersect, union, unique } from "../../common";
 
 type Food = {
     ingredients: Array<string>

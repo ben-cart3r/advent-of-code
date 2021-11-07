@@ -1,4 +1,4 @@
-import { product, sum } from "../helpers";
+import { product, sum } from "../../common";
 
 const parse = (input: string): Array<number> => {
     return input.split("\n").map((row) => parseInt(row));

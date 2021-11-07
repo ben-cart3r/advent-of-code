@@ -1,4 +1,4 @@
-import { inRange, xor } from "../helpers";
+import { inRange, xor } from "../../common";
 
 type PasswordPolicy = {
     character: string;
