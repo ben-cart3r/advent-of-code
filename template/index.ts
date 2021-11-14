@@ -1,7 +1,7 @@
-export const part1 = (input: string): string => {
+export const part1 = (input: string) => {
     return "";
 };
 
-export const part2 = (input: string): string => {
+export const part2 = (input: string) => {
     return "";
 };
