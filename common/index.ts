@@ -68,3 +68,7 @@ export const unique = <T>(arr: Array<T>): Array<T> => {
 export const xor = (a: boolean, b: boolean): boolean => {
     return Boolean(+a ^ +b);
 };
+
+export const parseAsIntegers = (input: string) => {
+    return input.split("\n").map((int) => parseInt(int));
+};
