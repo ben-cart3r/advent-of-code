@@ -72,3 +72,7 @@ export const xor = (a: boolean, b: boolean): boolean => {
 export const parseAsIntegers = (input: string) => {
     return input.split("\n").map((int) => parseInt(int));
 };
+
+export const subset = <T>(arr1: Array<T>, arr2: Array<T>) => {
+    return arr1.every((item) => arr2.includes(item));
+};
