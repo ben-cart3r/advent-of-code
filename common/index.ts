@@ -76,3 +76,7 @@ export const parseAsIntegers = (input: string) => {
 export const subset = <T>(arr1: Array<T>, arr2: Array<T>) => {
     return arr1.every((item) => arr2.includes(item));
 };
+
+export const count = <T>(arr: Array<T>, item: T) => {
+    return arr.filter((i) => i === item).length;
+};

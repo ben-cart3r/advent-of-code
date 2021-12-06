@@ -20,7 +20,7 @@ const sampleData = `7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8
 22 11 13  6  5
  2  0 12  3  7`;
 
-describe("year-day", () => {
+describe("2021-04", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = part1(sampleData);
