@@ -7,7 +7,7 @@ up 3
 down 8
 forward 2`;
 
-describe("year-day", () => {
+describe("2021-02", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = part1(sampleData);

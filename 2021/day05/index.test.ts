@@ -11,7 +11,7 @@ const sampleData = `0,9 -> 5,9
 0,0 -> 8,8
 5,5 -> 8,2`;
 
-describe("year-day", () => {
+describe("2021-05", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = part1(sampleData);
