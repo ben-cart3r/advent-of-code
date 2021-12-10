@@ -69,14 +69,21 @@ export const xor = (a: boolean, b: boolean): boolean => {
     return Boolean(+a ^ +b);
 };
 
-export const parseAsIntegers = (input: string) => {
+export const parseAsIntegers = (input: string): Array<number> => {
     return input.split("\n").map((int) => parseInt(int));
 };
 
-export const subset = <T>(arr1: Array<T>, arr2: Array<T>) => {
+export const subset = <T>(arr1: Array<T>, arr2: Array<T>): boolean => {
     return arr1.every((item) => arr2.includes(item));
 };
 
-export const count = <T>(arr: Array<T>, item: T) => {
+export const count = <T>(arr: Array<T>, item: T): number => {
     return arr.filter((i) => i === item).length;
+};
+
+export const median = (arr: Array<number>): number => {
+    const sorted = arr.sort((a, b) => a - b);
+    const middle = Math.ceil(sorted.length / 2) - 1;
+
+    return sorted[middle];
 };
