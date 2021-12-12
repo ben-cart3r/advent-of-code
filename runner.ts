@@ -2,10 +2,11 @@ import fs from "fs/promises";
 import path from "path";
 import yargs from "yargs";
 
-const runSolution = async (year: number, day: number) => {
+const runSolution = async (year: number, day: number, useSample: boolean) => {
     const dirName = day < 10 ? `day0${day}` : `day${day}`;
     const dirPath = `./${year}/${dirName}`;
-    const dataPath = path.join(__dirname, `${dirPath}/data.txt`);
+    const fileName = useSample ? "sample.txt" : "data.txt";
+    const dataPath = path.join(__dirname, `${dirPath}/${fileName}`);
 
     console.log(`-----------\nYear ${year} Day ${day}\n-----------`);
     console.time("File load time");
@@ -53,7 +54,17 @@ const getActiveYear = () => {
             describe: "Day",
             type: "string",
             demandOption: true,
+        })
+        .option("sample", {
+            alias: "s",
+            describe: "Sample File",
+            type: "boolean",
+            default: false,
         }).argv;
 
-    await runSolution(parseInt(options.year), parseInt(options.day));
+    await runSolution(
+        parseInt(options.year),
+        parseInt(options.day),
+        options.sample
+    );
 })();
