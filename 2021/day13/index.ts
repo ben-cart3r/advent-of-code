@@ -46,20 +46,18 @@ const draw = (dots: Array<Dot>) => {
 };
 
 const foldPaper = (dots: Array<Dot>, axis: string, line: number) => {
-    const result: Array<Dot> = [];
-
-    for (const dot of dots) {
+    return dots.reduce<Array<Dot>>((acc, dot) => {
         const newDot = {
             x: axis == "x" && dot.x > line ? line - (dot.x - line) : dot.x,
             y: axis == "y" && dot.y > line ? line - (dot.y - line) : dot.y,
         };
 
-        if (!exists(result, newDot)) {
-            result.push(newDot);
+        if (!exists(acc, newDot)) {
+            acc.push(newDot);
         }
-    }
 
-    return result;
+        return acc;
+    }, []);
 };
 
 export const part1 = (input: string): string => {
