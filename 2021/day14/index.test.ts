@@ -32,7 +32,7 @@ describe("2021-14", () => {
         it("should solve for sample data", () => {
             const result = part2(sampleData);
 
-            expect(result).toEqual("");
+            expect(result).toEqual("2188189693529");
         });
     });
 });
