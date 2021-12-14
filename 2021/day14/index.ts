@@ -75,10 +75,7 @@ const polymerize = (
     }
 
     // Have to add 1 to the final char in initial template
-    counts.set(
-        template[template.length - 1],
-        counts.get(template[template.length - 1]) + 1
-    );
+    increment(counts, template[template.length - 1], 1);
 
     const max = Math.max(...counts.values());
     const min = Math.min(...counts.values());
