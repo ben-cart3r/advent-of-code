@@ -1,15 +1,17 @@
+import { count } from "../../common";
+
 const parse = (input: string): Array<string> => {
-    return input.split('');
-}
+    return input.split("");
+};
 
 export const part1 = (input: string): string => {
     const chars = parse(input);
-    
-    const leftParenthesisCount = chars.filter((c) => c == '(').length;
+
+    const leftParenthesisCount = count(chars, "(");
     const rightParenthesisCount = chars.length - leftParenthesisCount;
 
     return (leftParenthesisCount - rightParenthesisCount).toString();
-}
+};
 
 export const part2 = (input: string): string => {
     const chars = parse(input);
@@ -18,10 +20,9 @@ export const part2 = (input: string): string => {
     let position = 0;
 
     while (floor >= 0 && position < chars.length) {
-        if (chars[position] == '(') {
+        if (chars[position] == "(") {
             floor++;
-        }
-        else {
+        } else {
             floor--;
         }
 
