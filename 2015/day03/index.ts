@@ -1,10 +1,10 @@
-const headings = ['^', '>', 'v', '<'];
+const headings = ["^", ">", "v", "<"];
 const dx = [0, 1, 0, -1];
 const dy = [1, 0, -1, 0];
 
 const parse = (input: string): Array<string> => {
-    return input.split('');
-}
+    return input.split("");
+};
 
 export const part1 = (input: string): string => {
     const directions = parse(input);
@@ -17,7 +17,7 @@ export const part1 = (input: string): string => {
         currentY += dy[headings.indexOf(direction)];
 
         if (!visited.includes(`${currentX}-${currentY}`)) {
-            visited.push(`${currentX}-${currentY}`)
+            visited.push(`${currentX}-${currentY}`);
         }
     }
 
@@ -38,7 +38,7 @@ export const part2 = (input: string): string => {
         currentY[agent] += dy[headings.indexOf(direction)];
 
         if (!visited.includes(`${currentX[agent]}-${currentY[agent]}`)) {
-            visited.push(`${currentX[agent]}-${currentY[agent]}`)
+            visited.push(`${currentX[agent]}-${currentY[agent]}`);
         }
     }
 
