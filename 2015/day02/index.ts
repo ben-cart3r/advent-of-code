@@ -1,4 +1,4 @@
-import { sum, sortNumbers } from "../../common";
+import { sum } from "../../common";
 
 class CubeFace {
     private length: number;
