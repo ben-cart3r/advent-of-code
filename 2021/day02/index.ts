@@ -1,13 +1,12 @@
-import Input from "../../common/input";
-
 const parse = (input: string) => {
-    return new Input(input)
-        .asLines()
-        .asDelimitedStrings(/ /)
-        .map(([dir, len]) => ({
+    return input.split("\n").map((line) => {
+        const [dir, len] = line.split(" ");
+
+        return {
             dir,
             len: parseInt(len),
-        }));
+        };
+    });
 };
 
 export const part1 = (input: string) => {

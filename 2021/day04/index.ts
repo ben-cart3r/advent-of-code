@@ -1,7 +1,5 @@
 import { difference, subset, sum } from "../../common";
 
-const x = /\s+/;
-
 export const parse = (input: string) => {
     const sections = input.split("\n\n");
 
