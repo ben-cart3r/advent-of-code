@@ -62,7 +62,7 @@ class Paragraph {
     }
 
     asDelimitedStrings(pattern: RegExp) {
-        return this.lines.map(l => l.asDelimitedString(pattern));
+        return this.lines.map((l) => l.asDelimitedString(pattern));
     }
 }
 

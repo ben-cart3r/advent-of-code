@@ -1,8 +1,9 @@
-import { parseAsIntegers, sum } from "../../common";
+import { sum } from "../../common";
+import Input from "../../common/input";
 import { asc } from "../../common/sorting";
 
 const parse = (input: string) => {
-    return input.split("\n\n").map(parseAsIntegers);
+    return new Input(input).asParagraphs().asIntegers();
 };
 
 export const part1 = (input: string): string => {
