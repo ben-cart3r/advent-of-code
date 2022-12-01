@@ -1,4 +1,5 @@
 import { compareArrays, createLogger } from "../../common";
+
 const logger = createLogger("info");
 
 type Deck = Array<number>;
