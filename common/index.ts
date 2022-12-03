@@ -87,3 +87,14 @@ export const median = (arr: Array<number>): number => {
 
     return sorted[middle];
 };
+
+export const chunks = <T>(
+    arr: Array<T>,
+    chunkSize: number
+): Array<Array<T>> => {
+    const out: Array<Array<T>> = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+        out.push(arr.slice(i, i + chunkSize));
+    }
+    return out;
+};
