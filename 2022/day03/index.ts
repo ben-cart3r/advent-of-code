@@ -2,10 +2,7 @@ import { chunks, intersect, sum } from "../../common";
 import Input from "../../common/input";
 
 const parse = (input: string): Array<Array<string>> => {
-    return new Input(input)
-        .asLines()
-        .asStrings()
-        .map((line) => line.split(""));
+    return new Input(input).asLines().asDelimitedStrings(/(?!^)/);
 };
 
 const charValue = (char: string) => {
