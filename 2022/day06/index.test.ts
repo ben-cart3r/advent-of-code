@@ -7,7 +7,7 @@ describe("2022-day", () => {
         it("should solve for sample data", () => {
             const result = part1(sampleData);
 
-            expect(result).toEqual("");
+            expect(result).toEqual("7");
         });
     });
 
@@ -15,7 +15,7 @@ describe("2022-day", () => {
         it("should solve for sample data", () => {
             const result = part2(sampleData);
 
-            expect(result).toEqual("");
+            expect(result).toEqual("19");
         });
     });
 });
