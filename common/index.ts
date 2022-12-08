@@ -98,3 +98,7 @@ export const chunks = <T>(
     }
     return out;
 };
+
+export const transpose = <T>(arr: Array<Array<T>>) => {
+    return arr[0].map((_, colIndex) => arr.map((row) => row[colIndex]));
+};
