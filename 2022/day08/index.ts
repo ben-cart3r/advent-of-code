@@ -31,18 +31,21 @@ const isVisible = (grid: Array<Array<string>>, x: number, y: number) => {
 };
 
 const calcPartialScenicScore = (trees: Array<string>, tree: string) => {
-    return trees.reduce<[number, boolean]>(([score, visible], t) => {
-        if (visible && t >= tree) {
-            return [score + 1, false];
-        }
-    
-        if (visible && t <= tree) {
-            return [score + 1, visible];
-        }
-    
-        return [score, visible];
-    }, [0, true]);
-}
+    return trees.reduce<[number, boolean]>(
+        ([score, visible], t) => {
+            if (visible && t >= tree) {
+                return [score + 1, false];
+            }
+
+            if (visible && t <= tree) {
+                return [score + 1, visible];
+            }
+
+            return [score, visible];
+        },
+        [0, true]
+    );
+};
 
 const calcScenicScore = (grid: Array<Array<string>>, x: number, y: number) => {
     const tree = grid[x][y];
