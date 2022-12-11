@@ -23,7 +23,8 @@
         "format:fix": "prettier --write .",
         "lint": "eslint \"**/*.{js,jsx,ts}\"",
         "start": "ts-node runner.ts",
-        "test": "jest"
+        "test": "jest",
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
