@@ -53,7 +53,7 @@ const worryLevel = (
     if (operand == "old") {
         return item * item;
     }
-    
+
     return item * operand;
 };
 
