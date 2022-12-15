@@ -107,10 +107,13 @@ export const part2 = (input: string, limit = 4000000): string => {
 
             let valid = true;
             for (const sensor of sensors) {
-                valid = valid && manhattan(sensor.x, sensor.y, parseInt(x), parseInt(y)) > sensor.dist
+                valid =
+                    valid &&
+                    manhattan(sensor.x, sensor.y, parseInt(x), parseInt(y)) >
+                        sensor.dist;
             }
             if (valid) {
-                distressBeacon = ((parseInt(x) * 4000000) + parseInt(y));
+                distressBeacon = parseInt(x) * 4000000 + parseInt(y);
                 break;
             }
         }
