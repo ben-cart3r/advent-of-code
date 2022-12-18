@@ -69,12 +69,12 @@ export const part2 = (input: string): string => {
         grid.add(id);
     }
 
-    // Fill the water around the lava
+    // Fill the steam around the lava
     const queue = new Queue<Cube>();
     const visited = new Set<string>();
     const steam = new Set<string>();
 
-    queue.push({ id: "0,0,0", x: 0, y: 0, z: 0 });
+    queue.push(createCube(0, 0, 0));
 
     while (!queue.empty()) {
         const cube = queue.pop();
