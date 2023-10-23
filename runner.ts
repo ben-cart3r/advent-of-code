@@ -58,7 +58,7 @@ const getActiveYear = () => {
             alias: "i",
             describe: "Input File",
             type: "string",
-            default: "data.txt",
+            default: "input.txt",
         }).argv;
 
     await runSolution(

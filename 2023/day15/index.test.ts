@@ -2,7 +2,7 @@ import { part1, part2 } from ".";
 
 const sampleData = "";
 
-describe("year-day", () => {
+describe("2023-15", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = part1(sampleData);

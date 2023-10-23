@@ -46,22 +46,22 @@ The repository contains my solutions to the Advent of Code yearly puzzles. My mo
 
 ### Built With
 
--   [TypeScript](https://www.typescriptlang.org/)
--   [Jest](https://jestjs.io/)
--   [ESLint](https://eslint.org/)
--   [Prettier](https://prettier.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
 
 ## Getting Started
 
 ### Prerequisites
 
--   Node.js
+- Node.js
 
     ```shell
     brew install node@16
     ```
 
--   Pre-commit
+- Pre-commit
 
     ```shell
     brew install pre-commit
@@ -69,13 +69,13 @@ The repository contains my solutions to the Advent of Code yearly puzzles. My mo
 
 ### Installation
 
--   Install pre-commit hooks
+- Install pre-commit hooks
 
     ```shell
     pre-commit install
     ```
 
--   Install NPM dependencies
+- Install NPM dependencies
 
     ```shell
     npm install
@@ -85,83 +85,77 @@ The repository contains my solutions to the Advent of Code yearly puzzles. My mo
 
 ### Pre-commit
 
--   Running pre-commit hooks independently
+- Running pre-commit hooks independently
 
     ```shell
     pre-commit run --all-files
     ```
 
--   Bypass pre-commit hooks
+- Bypass pre-commit hooks
 
-    ```
-    git commit --no-verify
-    ```
+  ```shell
+  git commit --no-verify
+  ```
 
 ### Linting
 
--   Check code format
+- Check code format
 
-    ```shell
-    npm run format:check
-    ```
+  ```shell
+  npm run format:check
+  ```
 
--   Fix code format
+- Fix code format
 
-    ```shell
-    npm run format:fix
-    ```
+  ```shell
+  npm run format:fix
+  ```
 
--   Perform static analysis (eslint)
+- Perform static analysis (eslint)
 
-    ```shell
-    npm run lint
-    ```
+  ```shell
+  npm run lint
+  ```
 
 ### Testing
 
--   Run all unit tests for all solutions
+- Run all unit tests for all solutions
 
-    ```shell
-    npm run test
-    ```
+  ```shell
+  npm run test
+  ```
 
--   Run all unit tests for a single day's puzzles
+- Run all unit tests for a single day's puzzles
 
-    ```shell
-    npm run test -- <year>/<day>
-    ```
+  ```shell
+  npm run test -- <year>/<day>
+  ```
 
-    e.g.
+  e.g.
 
-    ```shell
-    npm run test -- 2020/day01
-    ```
+  ```shell
+  npm run test -- 2020/day01
+  ```
 
--   Run a single unit test
+- Run a single unit test
 
-    ```
-    npm run test -- <year>/<day> -t <test>
-    ```
+  ```shell
+  npm run test -- <year>/<day> -t <test>
+  ```
 
-    e.g.
+  e.g.
 
-    ```shell
-    npm run test -- 2020/day01 -t part1
-    ```
+  ```shell
+  npm run test -- 2020/day01 -t part1
+  ```
 
-### Solution template
+### Bootstrapping
 
--   Create a new directory for the new solution
+- Create a new directory for the specified year and skeleton solution / test files
 
-    ```shell
-    mkdir -p <year>/<day>
-    ```
-
--   Copy the template to the new directory
-
-    ```
-    cp -r template/ <year>/<day>
-    ```
+  ```shell
+  ./bootstrap/bootstrap.sh 2023
+  ```
 
 ### Running solutions
 
