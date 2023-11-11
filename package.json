@@ -19,12 +19,13 @@
         "typescript": "^4.1.2"
     },
     "scripts": {
+        "copy-data-files-to-dist": "find src/**/**/**.txt -exec bash -c 'echo $0 | cut -d '/' -f2- | xargs -I {} cp src/{} dist/{}' {} \\; 2>/dev/null",
+        "build": "tsc && npm run copy-data-files-to-dist",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write .",
-        "lint": "eslint \"**/*.{js,jsx,ts}\"",
-        "start": "ts-node runner.ts",
-        "test": "jest",
-        "build": "tsc"
+        "lint": "eslint \"**/*.{js,ts}\"",
+        "start": "node dist/runner.js",
+        "test": "jest"
     },
     "repository": {
         "type": "git",
