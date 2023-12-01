@@ -1,9 +1,17 @@
 import { sum } from "../../common";
 import Input from "../../common/input";
 
-const digitTokens = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+type Digit = typeof digitTokens[number];
+type NumberWord = typeof wordTokens[number];
+type Token = Digit | NumberWord;
 
-const stringTokens = [
+const isNumberWord = (value: string): value is NumberWord => {
+    return wordTokens.includes(value as NumberWord);
+};
+
+const digitTokens = ["1", "2", "3", "4", "5", "6", "7", "8", "9"] as const;
+
+const wordTokens = [
     "one",
     "two",
     "three",
@@ -13,10 +21,10 @@ const stringTokens = [
     "seven",
     "eight",
     "nine",
-];
+] as const;
 
-const tokenize = (input: string, validTokens: Array<string>) => {
-    const tokens: Array<string> = [];
+const tokenize = (input: string, validTokens: Array<Token>) => {
+    const tokens: Array<Token> = [];
 
     for (let i = 0; i < input.length; ++i) {
         for (const token of validTokens) {
@@ -29,8 +37,8 @@ const tokenize = (input: string, validTokens: Array<string>) => {
     return tokens;
 };
 
-const translate = (tokens: Array<string>) => {
-    const map: Record<string, string> = {
+const translate = (tokens: Array<Digit | NumberWord>): Array<Digit> => {
+    const map: Record<NumberWord, Digit> = {
         one: "1",
         two: "2",
         three: "3",
@@ -43,7 +51,7 @@ const translate = (tokens: Array<string>) => {
     };
 
     return tokens.map((token) => {
-        if (map[token]) {
+        if (isNumberWord(token)) {
             return map[token];
         }
         return token;
@@ -52,19 +60,19 @@ const translate = (tokens: Array<string>) => {
 
 const parse = (
     input: string,
-    replaceStringRepresentation: boolean
-): Array<Array<string>> => {
+    findStringRepresentations: boolean
+): Array<Array<Digit>> => {
     const lines = new Input(input).asLines().asStrings();
-    const tokens = replaceStringRepresentation
-        ? [...digitTokens, ...stringTokens]
-        : digitTokens;
+    const tokens = findStringRepresentations
+        ? [...digitTokens, ...wordTokens]
+        : [...digitTokens];
     const tokenised = lines.map((line) => tokenize(line, tokens));
     const translated = tokenised.map((line) => translate(line));
 
     return translated;
 };
 
-const getCalibrationValue = (line: Array<string>) =>
+const getCalibrationValue = (line: Array<Digit>) =>
     parseInt(line[0] + line[line.length - 1]);
 
 export const part1 = (input: string): string => {
