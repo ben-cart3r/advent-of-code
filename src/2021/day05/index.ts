@@ -92,7 +92,7 @@ export const part1 = (input: string): string => {
             const point = points[i];
 
             if (acc.has(point)) {
-                acc.set(point, acc.get(point) + 1);
+                acc.set(point, acc.get(point)! + 1);
             } else {
                 acc.set(point, 1);
             }
@@ -101,7 +101,7 @@ export const part1 = (input: string): string => {
         return acc;
     }, new Map<string, number>());
 
-    const dangerous = [...store.keys()].filter((key) => store.get(key) > 1);
+    const dangerous = [...store.keys()].filter((key) => store.get(key)! > 1);
 
     return dangerous.length.toString();
 };
@@ -117,7 +117,7 @@ export const part2 = (input: string): string => {
             const point = points[i];
 
             if (acc.has(point)) {
-                acc.set(point, acc.get(point) + 1);
+                acc.set(point, acc.get(point)! + 1);
             } else {
                 acc.set(point, 1);
             }
@@ -126,7 +126,7 @@ export const part2 = (input: string): string => {
         return acc;
     }, new Map<string, number>());
 
-    const dangerous = [...store.keys()].filter((key) => store.get(key) > 1);
+    const dangerous = [...store.keys()].filter((key) => store.get(key)! > 1);
 
     return dangerous.length.toString();
 };

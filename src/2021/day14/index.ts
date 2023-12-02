@@ -22,10 +22,10 @@ const parse = (input: string) => {
 const increment = (
     counter: Map<string, number>,
     key: string,
-    value: number
+    value: number,
 ) => {
     if (counter.has(key)) {
-        counter.set(key, counter.get(key) + value);
+        counter.set(key, counter.get(key)! + value);
     } else {
         counter.set(key, value);
     }
@@ -34,7 +34,7 @@ const increment = (
 const polymerize = (
     template: Array<string>,
     pairs: Array<Pair>,
-    steps: number
+    steps: number,
 ) => {
     // Store polymer as count of pairs
     let polymer = new Map<string, number>();
@@ -52,10 +52,10 @@ const polymerize = (
             // Find char "m" to be inserted between "l" & "r"
             const l = key[0];
             const r = key[1];
-            const m = pairs.find((pair) => pair.left == key).right;
+            const m = pairs.find((pair) => pair.left == key)!.right;
 
             // Count of how many times we've seen lr so far
-            const v = polymer.get(key);
+            const v = polymer.get(key)!;
 
             increment(p, `${l}${m}`, v);
             increment(p, `${m}${r}`, v);
@@ -69,7 +69,7 @@ const polymerize = (
 
     for (const key of polymer.keys()) {
         const l = key[0];
-        const v = polymer.get(key);
+        const v = polymer.get(key)!;
 
         increment(counts, l, v);
     }

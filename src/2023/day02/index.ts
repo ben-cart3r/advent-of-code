@@ -51,7 +51,7 @@ const isValidGame = (
     game: Game,
     redThreshold: number,
     greenThreshold: number,
-    blueThreshold: number
+    blueThreshold: number,
 ) => {
     const maxReds = getMaximumDrawnCubes(game, "red");
     const maxGreens = getMaximumDrawnCubes(game, "green");

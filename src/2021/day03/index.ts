@@ -48,13 +48,13 @@ export const part2 = (input: string): string => {
 
         // Filter by most common
         numbers1 = numbers1.filter(
-            (num) => num[counter] == (count1_1 >= count1_0 ? "1" : "0")
+            (num) => num[counter] == (count1_1 >= count1_0 ? "1" : "0"),
         );
 
         // Filter by least common
         if (numbers2.length > 1) {
             numbers2 = numbers2.filter(
-                (num) => num[counter] == (count2_0 <= count2_1 ? "0" : "1")
+                (num) => num[counter] == (count2_0 <= count2_1 ? "0" : "1"),
             );
         }
 

@@ -14,7 +14,7 @@ const parse = (input: string): Array<Array<Octopus>> => {
             y,
             val: parseInt(item),
             flashed: false,
-        }))
+        })),
     );
 };
 
@@ -35,7 +35,7 @@ export const part1 = (input: string): string => {
         });
 
         while (toFlash.length > 0) {
-            const octopus = toFlash.pop();
+            const octopus = toFlash.pop()!;
             const neighbours = grid.neighbours(octopus.x, octopus.y);
 
             if (!octopus.flashed) {
@@ -80,7 +80,7 @@ export const part2 = (input: string): string => {
         });
 
         while (toFlash.length > 0) {
-            const octopus = toFlash.pop();
+            const octopus = toFlash.pop()!;
             const neighbours = grid.neighbours(octopus.x, octopus.y);
 
             if (!octopus.flashed) {

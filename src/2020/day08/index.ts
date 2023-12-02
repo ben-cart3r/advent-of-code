@@ -19,7 +19,7 @@ const parseInstructions = (input: string): Array<Instruction> => {
 const runInstruction = (
     instructions: Array<Instruction>,
     pointer: number,
-    accumulator: number
+    accumulator: number,
 ): [number, number] => {
     switch (instructions[pointer].operation) {
         case "nop":
@@ -52,7 +52,7 @@ const runProgram = (instructions: Array<Instruction>): [number, number] => {
         [pointer, accumulator] = runInstruction(
             instructions,
             pointer,
-            accumulator
+            accumulator,
         );
     }
 

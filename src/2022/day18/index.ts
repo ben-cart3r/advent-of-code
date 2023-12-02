@@ -42,7 +42,7 @@ const sides = ({ x, y, z }: Cube) => {
         .map(([dx, dy, dz]) => createCube(x + dx, y + dy, z + dz))
         .filter(
             ({ x, y, z }) =>
-                inRange(x, -5, 30) && inRange(y, -5, 30) && inRange(z, -5, 30)
+                inRange(x, -5, 30) && inRange(y, -5, 30) && inRange(z, -5, 30),
         );
 };
 
@@ -96,8 +96,8 @@ export const part2 = (input: string): string => {
         ...cubes.map(
             (cube) =>
                 sides(cube).filter((side) =>
-                    steam.has(`${side.x},${side.y},${side.z}`)
-                ).length
-        )
+                    steam.has(`${side.x},${side.y},${side.z}`),
+                ).length,
+        ),
     ).toString();
 };

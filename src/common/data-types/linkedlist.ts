@@ -2,25 +2,25 @@ const inspect = Symbol.for("nodejs.util.inspect.custom");
 
 type ListNode<T> = {
     value: T;
-    next: ListNode<T>;
-    prev: ListNode<T>;
+    next?: ListNode<T>;
+    prev?: ListNode<T>;
 };
 
 export default class LinkedList<T> {
-    private _head: ListNode<T>;
-    private _tail: ListNode<T>;
+    private _head?: ListNode<T>;
+    private _tail?: ListNode<T>;
 
     constructor() {
-        this._head = null;
-        this._tail = null;
+        this._head = undefined;
+        this._tail = undefined;
     }
 
     clear(): void {
-        this._head = null;
+        this._head = undefined;
     }
 
     head(): ListNode<T> {
-        return this._head;
+        return this._head!;
     }
 
     empty(): boolean {
@@ -38,12 +38,12 @@ export default class LinkedList<T> {
     insertAfter(node: ListNode<T>, value: T): void {
         const newNode: ListNode<T> = {
             value,
-            next: null,
+            next: undefined,
             prev: node,
         };
 
         if (node.next == null) {
-            newNode.next = null;
+            newNode.next = undefined;
             this._tail = newNode;
         } else {
             newNode.next = node.next;
@@ -57,11 +57,11 @@ export default class LinkedList<T> {
         const newNode: ListNode<T> = {
             value,
             next: node,
-            prev: null,
+            prev: undefined,
         };
 
         if (node.prev == null) {
-            newNode.prev = null;
+            newNode.prev = undefined;
             this._head = newNode;
         } else {
             newNode.prev = node.prev;
@@ -74,15 +74,15 @@ export default class LinkedList<T> {
     insertFront(value: T): void {
         const newNode: ListNode<T> = {
             value,
-            next: null,
-            prev: null,
+            next: undefined,
+            prev: undefined,
         };
 
         if (this._tail == null) {
             this._head = newNode;
             this._tail = newNode;
         } else {
-            this.insertBefore(this._head, value);
+            this.insertBefore(this._head!, value);
         }
     }
 
@@ -101,7 +101,7 @@ export default class LinkedList<T> {
     }
 
     tail(): ListNode<T> {
-        return this._tail;
+        return this._tail!;
     }
 
     [inspect](): Array<T> {
@@ -113,7 +113,7 @@ export default class LinkedList<T> {
             node = node.next;
         }
 
-        out.push(node.value);
+        out.push(node!.value);
 
         return out;
     }

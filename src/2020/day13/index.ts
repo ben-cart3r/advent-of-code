@@ -10,22 +10,25 @@ const parseInput = (input: string) => {
 const solver1 = (input: string): number => {
     const { timestamp, busIds } = parseInput(input);
 
-    const nextArrivals = busIds.reduce((acc, busId) => {
-        if (busId == "x") {
-            return acc;
-        }
+    const nextArrivals = busIds.reduce(
+        (acc, busId) => {
+            if (busId == "x") {
+                return acc;
+            }
 
-        const id = parseInt(busId);
-        const t = timestamp - (timestamp % id);
+            const id = parseInt(busId);
+            const t = timestamp - (timestamp % id);
 
-        return [
-            ...acc,
-            {
-                id,
-                time: t + id,
-            },
-        ];
-    }, []);
+            return [
+                ...acc,
+                {
+                    id,
+                    time: t + id,
+                },
+            ];
+        },
+        [] as Array<{ id: number; time: number }>,
+    );
 
     const nextArrival = nextArrivals.sort((a, b) => {
         if (a.time > b.time) {
@@ -57,19 +60,20 @@ const solver1 = (input: string): number => {
 
 const modInverse = (a: bigint, mod: bigint) => {
     a %= mod;
-    for (let i = 1n; i < mod; ++i) {
-        if ((a * i) % mod == 1n) {
+    for (let i = BigInt("1"); i < mod; ++i) {
+        if ((a * i) % mod == BigInt("1")) {
             return i;
         }
     }
+    return BigInt("0");
 };
 
-const solver2 = (input: string): BigInt => {
+const solver2 = (input: string): bigint => {
     const { busIds } = parseInput(input);
 
     const initial: Array<[number, number]> = [];
 
-    const numbers = busIds.reduce((acc, id, i) => {
+    const numbers = busIds.reduce<Array<[number, number]>>((acc, id, i) => {
         if (id == "x") {
             return acc;
         }
@@ -87,7 +91,7 @@ const solver2 = (input: string): BigInt => {
 
     // Product of bus ids
     const N = numbers.reduce((acc, bus) => (acc *= BigInt(bus[0])), BigInt(1));
-    let ans = 0n;
+    let ans = BigInt("0");
 
     for (let i = 0; i < numbers.length; ++i) {
         const [bus, idx] = numbers[i];

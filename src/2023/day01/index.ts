@@ -1,8 +1,8 @@
 import { sum } from "../../common";
 import Input from "../../common/input";
 
-type Digit = typeof digitTokens[number];
-type NumberWord = typeof wordTokens[number];
+type Digit = (typeof digitTokens)[number];
+type NumberWord = (typeof wordTokens)[number];
 type Token = Digit | NumberWord;
 
 const isNumberWord = (value: string): value is NumberWord => {
@@ -60,7 +60,7 @@ const translate = (tokens: Array<Digit | NumberWord>): Array<Digit> => {
 
 const parse = (
     input: string,
-    findStringRepresentations: boolean
+    findStringRepresentations: boolean,
 ): Array<Array<Digit>> => {
     const lines = new Input(input).asLines().asStrings();
     const tokens = findStringRepresentations

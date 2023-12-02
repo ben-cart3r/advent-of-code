@@ -30,7 +30,7 @@ export const part1 = (input: string) => {
 
             return [h, d];
         },
-        [0, 0]
+        [0, 0],
     );
 
     return (horizontal * depth).toString();
@@ -58,7 +58,7 @@ export const part2 = (input: string) => {
 
             return [h, d, a];
         },
-        [0, 0, 0]
+        [0, 0, 0],
     );
 
     return (horizontal * depth).toString();

@@ -15,9 +15,15 @@ const parse = (input: string): Array<Sensor> => {
         .asLines()
         .asStrings()
         .map((line) => {
-            const [, sx, sy, bx, by] = line.match(
-                /Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)/
+            const match = line.match(
+                /Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)/,
             );
+
+            if (!match) {
+                throw new Error("Could not parse");
+            }
+
+            const [, sx, sy, bx, by] = match;
 
             return {
                 x: parseInt(sx),
@@ -30,7 +36,7 @@ const parse = (input: string): Array<Sensor> => {
                     parseInt(sx),
                     parseInt(sy),
                     parseInt(bx),
-                    parseInt(by)
+                    parseInt(by),
                 ),
             };
         });
@@ -99,6 +105,7 @@ export const part2 = (input: string, limit = 4000000): string => {
         sets.push(nearby);
     }
 
+    // @ts-expect-error - can be fixed later
     let distressBeacon: number = null;
 
     for (const set of sets) {

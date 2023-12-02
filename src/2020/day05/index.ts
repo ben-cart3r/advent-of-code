@@ -33,6 +33,7 @@ const solver2 = (input: string): number => {
             return i;
         }
     }
+    return 0;
 };
 
 export { solver1, solver2 };

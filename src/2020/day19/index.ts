@@ -18,10 +18,10 @@ const memoized = new Map<string, string>();
 
 const buildRegex = (rules: Map<string, string>, id: string): string => {
     if (memoized.get(id)) {
-        return memoized.get(id);
+        return memoized.get(id)!;
     }
 
-    const r = rules.get(id);
+    const r = rules.get(id)!;
 
     if (r == '"a"' || r == '"b"') {
         return r[1];
@@ -45,7 +45,7 @@ const buildRegex = (rules: Map<string, string>, id: string): string => {
                 memoized.set(id, `(${regex})`);
             }
         }
-        return memoized.get(id);
+        return memoized.get(id)!;
     }
 };
 
@@ -74,7 +74,7 @@ const solver2 = (input: string): number => {
     // Can't do recursive regex in native JS, so expand
     rules.set(
         "11",
-        "42 31 | 42 42 31 31 | 42 42 42 31 31 31 | 42 42 42 42 31 31 31 31 | 42 42 42 42 42 31 31 31 31 31 | 42 42 42 42 42 42 42 31 31 31 31 31 31 31"
+        "42 31 | 42 42 31 31 | 42 42 42 31 31 31 | 42 42 42 42 31 31 31 31 | 42 42 42 42 42 31 31 31 31 31 | 42 42 42 42 42 42 42 31 31 31 31 31 31 31",
     );
 
     const regex = new RegExp(buildRegex(rules, "0"));

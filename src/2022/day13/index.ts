@@ -14,7 +14,7 @@ type ListPacket = {
 type UnknownDimensionalArray = Array<number | UnknownDimensionalArray>;
 
 const convertList = (
-    list: UnknownDimensionalArray
+    list: UnknownDimensionalArray,
 ): Array<IntegerPacket | ListPacket> => {
     return list.map((item) => {
         if (typeof item == "number") {

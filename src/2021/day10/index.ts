@@ -60,7 +60,7 @@ export const part1 = (input: string): string => {
             if (token instanceof OpenToken) {
                 stack.push(token);
             } else {
-                if (!stack.pop().mirrors(token)) {
+                if (!stack.pop()!.mirrors(token)) {
                     incorrectTokens.push(token);
                 }
             }
@@ -84,14 +84,14 @@ export const part2 = (input: string): string => {
             if (token instanceof OpenToken) {
                 stack.push(token);
             } else {
-                valid = valid && stack.pop().mirrors(token);
+                valid = valid && stack.pop()!.mirrors(token);
             }
         }
 
         if (valid) {
             const score = stack.reverse().reduce((acc, token) => {
                 const index = openChars.findIndex(
-                    (char) => char == token.value
+                    (char) => char == token.value,
                 );
                 return acc * 5 + index + 1;
             }, 0);

@@ -35,6 +35,7 @@ class XMASDecoder {
                 return target;
             }
         }
+        return 0;
     }
 
     findEncryptionWeakness(): number {
@@ -65,6 +66,7 @@ class XMASDecoder {
 
             idx++;
         }
+        return 0;
     }
 }
 

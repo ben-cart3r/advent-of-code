@@ -4,7 +4,7 @@ const parse = (input: string): Array<[string, number]> => {
     return new Input(input)
         .asLines()
         .asStrings()
-        .map((l) => l.match(/([RLUD]) (\d+)/).slice(1, 3))
+        .map((l) => (l.match(/([RLUD]) (\d+)/) || []).slice(1, 3))
         .map(([dir, count]) => [dir, parseInt(count)]);
 };
 
@@ -25,7 +25,7 @@ const processMotions = (motions: Array<[string, number]>, knots: number) => {
         for (let i = 0; i < count; ++i) {
             const [hx, hy] = knotPositions[0];
 
-            knotPositions[0] = [hx + move[0], hy + move[1]];
+            knotPositions[0] = [hx + move![0], hy + move![1]];
 
             for (let j = 1; j < knots; ++j) {
                 const [px, py] = knotPositions[j - 1];

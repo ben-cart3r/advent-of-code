@@ -43,7 +43,7 @@ const calcPartialScenicScore = (trees: Array<string>, tree: string) => {
 
             return [score, visible];
         },
-        [0, true]
+        [0, true],
     );
 };
 

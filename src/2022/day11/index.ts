@@ -41,7 +41,7 @@ const parse = (input: string): Array<Monkey> => {
 const worryLevel = (
     item: number,
     operator: "+" | "*",
-    operand: "old" | number
+    operand: "old" | number,
 ) => {
     if (operator == "+") {
         if (operand == "old") {
@@ -60,7 +60,7 @@ const worryLevel = (
 const process = (
     monkeys: Array<Monkey>,
     rounds: number,
-    reliefFactor: number
+    reliefFactor: number,
 ) => {
     const normalizer = monkeys.reduce((acc, m) => acc * m.test, 1);
 
@@ -71,9 +71,9 @@ const process = (
             while (monkey.items.length > 0) {
                 const item = monkey.items.shift();
                 const worry = Math.floor(
-                    (worryLevel(item, monkey.operator, monkey.operand) %
+                    (worryLevel(item!, monkey.operator, monkey.operand) %
                         normalizer) /
-                        reliefFactor
+                        reliefFactor,
                 );
 
                 if (worry % monkey.test == 0) {
@@ -91,7 +91,7 @@ const process = (
         ...monkeys
             .sort((a, b) => asc(a.inspected, b.inspected))
             .slice(0, 2)
-            .map((m) => m.inspected)
+            .map((m) => m.inspected),
     );
 };
 

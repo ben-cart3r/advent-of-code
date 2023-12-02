@@ -30,7 +30,7 @@ const isWin = (p1: string, p2: string) => wins.get(p1) == p2;
 const isDraw = (p1: string, p2: string) => draws.get(p1) == p2;
 
 const calculateScore = (p1: string, p2: string) =>
-    (isWin(p1, p2) ? win : isDraw(p1, p2) ? draw : loss) + scores.get(p2);
+    (isWin(p1, p2) ? win : isDraw(p1, p2) ? draw : loss) + scores.get(p2)!;
 
 const parse = (input: string): Array<Array<string>> => {
     return new Input(input).asLines().asDelimitedStrings(/ /);
@@ -40,7 +40,7 @@ export const part1 = (input: string): string => {
     const rounds = parse(input);
     const score = rounds.reduce(
         (acc, [p1, p2]) => acc + calculateScore(p1, p2),
-        0
+        0,
     );
 
     return score.toString();
@@ -53,11 +53,11 @@ export const part2 = (input: string): string => {
         (acc, [p1, p2]) =>
             acc +
             (p2 == "Y"
-                ? draw + scores.get(draws.get(p1))
+                ? draw + scores.get(draws.get(p1)!)!
                 : p2 == "X"
-                ? scores.get(losses.get(p1))
-                : win + scores.get(wins.get(p1))),
-        0
+                  ? scores.get(losses.get(p1)!)!
+                  : win + scores.get(wins.get(p1)!)!),
+        0,
     );
 
     return score.toString();

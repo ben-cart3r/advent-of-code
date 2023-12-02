@@ -1,4 +1,4 @@
-import { part1, part2 } from ".";
+import { part1 } from ".";
 
 const sampleData = "1,1,1,4,99,5,6,0,99";
 

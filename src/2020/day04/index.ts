@@ -24,13 +24,13 @@ const validateHeight = (height: string): boolean => {
         return inRange(
             parseInt(height.substring(0, height.indexOf("cm"))),
             150,
-            193
+            193,
         );
     } else {
         return inRange(
             parseInt(height.substring(0, height.indexOf("in"))),
             59,
-            76
+            76,
         );
     }
 };
@@ -42,31 +42,31 @@ const validatePassport = (passport: Passport, part2: boolean): boolean => {
         return valid;
     }
 
-    if (!inRange(parseInt(passport.get("byr")), 1920, 2002)) {
+    if (!inRange(parseInt(passport.get("byr")!), 1920, 2002)) {
         return false;
     }
 
-    if (!inRange(parseInt(passport.get("iyr")), 2010, 2020)) {
+    if (!inRange(parseInt(passport.get("iyr")!), 2010, 2020)) {
         return false;
     }
 
-    if (!inRange(parseInt(passport.get("eyr")), 2020, 2030)) {
+    if (!inRange(parseInt(passport.get("eyr")!), 2020, 2030)) {
         return false;
     }
 
-    if (!validateHeight(passport.get("hgt"))) {
+    if (!validateHeight(passport.get("hgt")!)) {
         return false;
     }
 
-    if (!isHex(passport.get("hcl"))) {
+    if (!isHex(passport.get("hcl")!)) {
         return false;
     }
 
-    if (!eyeColours.includes(passport.get("ecl"))) {
+    if (!eyeColours.includes(passport.get("ecl")!)) {
         return false;
     }
 
-    if (!(isNumber(passport.get("pid")) && passport.get("pid").length == 9)) {
+    if (!(isNumber(passport.get("pid")!) && passport.get("pid")!.length == 9)) {
         return false;
     }
 
@@ -76,7 +76,7 @@ const validatePassport = (passport: Passport, part2: boolean): boolean => {
 const solver1 = (input: string): number => {
     const passports = parse(input);
     const validPassports = passports.filter((passport) =>
-        validatePassport(passport, false)
+        validatePassport(passport, false),
     );
 
     return validPassports.length;
@@ -85,7 +85,7 @@ const solver1 = (input: string): number => {
 const solver2 = (input: string): number => {
     const passports = parse(input);
     const validPassports = passports.filter((passport) =>
-        validatePassport(passport, true)
+        validatePassport(passport, true),
     );
 
     return validPassports.length;

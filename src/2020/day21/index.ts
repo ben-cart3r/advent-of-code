@@ -17,16 +17,24 @@ const parse = (input: string): Array<Food> => {
 };
 
 const getUniqueAllergens = (foods: Array<Food>): Array<string> => {
-    return unique(foods.reduce((acc, food) => [...acc, ...food.allergens], []));
+    return unique(
+        foods.reduce(
+            (acc, food) => [...acc, ...food.allergens],
+            [] as Array<string>,
+        ),
+    );
 };
 
 const getAllIngredients = (foods: Array<Food>): Array<string> => {
-    return foods.reduce((acc, food) => [...acc, ...food.ingredients], []);
+    return foods.reduce(
+        (acc, food) => [...acc, ...food.ingredients],
+        [] as Array<string>,
+    );
 };
 
 const getHarmfulIngredients = (
     foods: Array<Food>,
-    allergens: Array<string>
+    allergens: Array<string>,
 ): Array<string> => {
     let potentiallyHarmful = allergens.map((allergen) => {
         return foods.reduce((acc, food) => {
@@ -38,6 +46,7 @@ const getHarmfulIngredients = (
                 }
             }
             return acc;
+            // @ts-expect-error - can be fixed later
         }, null as Set<string>);
     });
 
@@ -64,7 +73,7 @@ const solver1 = (input: string): number => {
     const harmfulIngredients = getHarmfulIngredients(foods, uniqueAllergens);
     const allIngredients = getAllIngredients(foods);
     const nonAllergenIngredients = allIngredients.filter(
-        (item) => !harmfulIngredients.includes(item)
+        (item) => !harmfulIngredients.includes(item),
     ).length;
 
     return nonAllergenIngredients;

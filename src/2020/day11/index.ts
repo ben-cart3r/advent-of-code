@@ -34,7 +34,7 @@ const adjacent = (
     area: Array<string>,
     seatId: number,
     width: number,
-    height: number
+    height: number,
 ): Array<[number, number]> => {
     const row = Math.floor(seatId / width);
     const col = seatId % width;
@@ -55,7 +55,7 @@ const nearAdjacent = (
     area: Array<string>,
     seatId: number,
     width: number,
-    height: number
+    height: number,
 ): Array<[number, number]> => {
     const row = Math.floor(seatId / width);
     const col = seatId % width;

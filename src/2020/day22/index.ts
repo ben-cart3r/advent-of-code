@@ -25,7 +25,7 @@ const calcDeckScore = (deck: Deck): number => {
 const isPreviousState = (
     previousRounds: DeckStore,
     deck1: Deck,
-    deck2: Deck
+    deck2: Deck,
 ): boolean => {
     for (let i = 0; i < previousRounds.length; ++i) {
         if (
@@ -42,8 +42,8 @@ const solver1 = (input: string): number => {
     const [deck1, deck2] = parse(input);
 
     while (deck1.length > 0 && deck2.length > 0) {
-        const card1 = deck1.shift();
-        const card2 = deck2.shift();
+        const card1 = deck1.shift()!;
+        const card2 = deck2.shift()!;
 
         if (card1 > card2) {
             deck1.push(card1);
@@ -85,17 +85,17 @@ const solver2 = (input: string): number => {
             previousRounds.push([[...deck1], [...deck2]]);
 
             logger.debug(
-                `-- Round ${previousRounds.length} (Game ${thisGameId}) --`
+                `-- Round ${previousRounds.length} (Game ${thisGameId}) --`,
             );
             logger.debug(
-                `Player 1's deck (${deck1.length}): ${deck1.join(",")}`
+                `Player 1's deck (${deck1.length}): ${deck1.join(",")}`,
             );
             logger.debug(
-                `Player 2's deck (${deck2.length}): ${deck2.join(",")}`
+                `Player 2's deck (${deck2.length}): ${deck2.join(",")}`,
             );
 
-            const card1 = deck1.shift();
-            const card2 = deck2.shift();
+            const card1 = deck1.shift()!;
+            const card2 = deck2.shift()!;
 
             logger.debug(`Player 1 plays: ${card1}`);
             logger.debug(`Player 2 plays: ${card2}`);
@@ -109,13 +109,13 @@ const solver2 = (input: string): number => {
                     deck1.push(card1);
                     deck1.push(card2);
                     logger.debug(
-                        `Player 1 wins round ${previousRounds.length} of game ${thisGameId}!`
+                        `Player 1 wins round ${previousRounds.length} of game ${thisGameId}!`,
                     );
                 } else {
                     deck2.push(card2);
                     deck2.push(card1);
                     logger.debug(
-                        `Player 2 wins round ${previousRounds.length} of game ${thisGameId}!`
+                        `Player 2 wins round ${previousRounds.length} of game ${thisGameId}!`,
                     );
                 }
             } else {
@@ -123,13 +123,13 @@ const solver2 = (input: string): number => {
                     deck1.push(card1);
                     deck1.push(card2);
                     logger.debug(
-                        `Player 1 wins round ${previousRounds.length} of game ${thisGameId}!`
+                        `Player 1 wins round ${previousRounds.length} of game ${thisGameId}!`,
                     );
                 } else {
                     deck2.push(card2);
                     deck2.push(card1);
                     logger.debug(
-                        `Player 2 wins round ${previousRounds.length} of game ${thisGameId}!`
+                        `Player 2 wins round ${previousRounds.length} of game ${thisGameId}!`,
                     );
                 }
             }

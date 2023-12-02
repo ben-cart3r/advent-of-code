@@ -72,6 +72,8 @@ const applyOperator = (type: number, values: Array<number>) => {
             return +(values[0] < values[1]);
         case 7:
             return +(values[0] == values[1]);
+        default:
+            return 0;
     }
 };
 

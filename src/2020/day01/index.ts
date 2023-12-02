@@ -14,6 +14,7 @@ const solver1 = (input: string): number => {
             }
         }
     }
+    return 0;
 };
 
 const solver2 = (input: string): number => {
@@ -28,6 +29,8 @@ const solver2 = (input: string): number => {
             }
         }
     }
+
+    return 0;
 };
 
 export { solver1, solver2 };

@@ -43,7 +43,7 @@ const solver1 = (input: string): number => {
 
     // Recursively search for a bag type
     const checkBag = (bagType: string): boolean => {
-        const rule = rules.find((rule) => rule.name == bagType);
+        const rule = rules.find((rule) => rule.name == bagType)!;
 
         // Exit condition, stop when "shiny gold" bag is found
         if (rule.contents.find((bagType) => bagType.name == "shiny gold")) {
@@ -70,7 +70,7 @@ const solver2 = (input: string): number => {
 
     // Recursively count bags inside a "shiny gold" bag
     const countBags = (bagType: string): number => {
-        const rule = rules.find((rule) => rule.name == bagType);
+        const rule = rules.find((rule) => rule.name == bagType)!;
 
         // Exit condition, return 0 if no more "inner" bags
         if (rule.contents.length == 0) {

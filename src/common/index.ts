@@ -33,12 +33,15 @@ export const inRange = (x: number, min: number, max: number): boolean => {
 };
 
 export const intersect = <T>(...args: Array<Set<T>>): Set<T> => {
-    return args.reduce((acc, set) => {
+    if (args.length == 0) {
+        throw new Error("Need at 1 least set to intersect");
+    }
+    return args.slice(1).reduce((acc, set) => {
         if (acc == null) {
             return set;
         }
         return new Set([...acc].filter((item) => set.has(item)));
-    }, null as Set<T>);
+    }, args[0]);
 };
 
 export const isHex = (value: string): boolean => {
@@ -90,7 +93,7 @@ export const median = (arr: Array<number>): number => {
 
 export const chunks = <T>(
     arr: Array<T>,
-    chunkSize: number
+    chunkSize: number,
 ): Array<Array<T>> => {
     const out: Array<Array<T>> = [];
     for (let i = 0; i < arr.length; i += chunkSize) {

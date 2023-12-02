@@ -13,7 +13,7 @@ export const part1 = (input: string): string => {
     const crabs = parse(input);
 
     const scores = crabs.map((_, idx) =>
-        sum(...crabs.map((crab) => Math.abs(crab - idx)))
+        sum(...crabs.map((crab) => Math.abs(crab - idx))),
     );
 
     return Math.min(...scores).toString();
@@ -23,7 +23,7 @@ export const part2 = (input: string): string => {
     const crabs = parse(input);
 
     const scores = crabs.map((_, idx) =>
-        sum(...crabs.map((crab) => triangleNum(Math.abs(crab - idx))))
+        sum(...crabs.map((crab) => triangleNum(Math.abs(crab - idx)))),
     );
 
     return Math.min(...scores).toString();

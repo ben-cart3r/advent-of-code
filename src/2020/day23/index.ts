@@ -1,7 +1,7 @@
 type Node<T> = {
     data: T;
-    next: Node<T>;
-    prev: Node<T>;
+    next?: Node<T>;
+    prev?: Node<T>;
 };
 
 class IndexableLinkedList<T> {
@@ -11,8 +11,8 @@ class IndexableLinkedList<T> {
         if (prev == null) {
             const node: Node<T> = {
                 data: data,
-                next: null,
-                prev: null,
+                next: undefined,
+                prev: undefined,
             };
 
             node.next = node;
@@ -28,7 +28,7 @@ class IndexableLinkedList<T> {
             };
 
             prev.next = node;
-            node.next.prev = node;
+            node.next!.prev = node;
             this.index.set(data, node);
             return node;
         }
@@ -39,8 +39,8 @@ class IndexableLinkedList<T> {
     }
 
     erase(node: Node<T>) {
-        node.prev.next = node.next;
-        node.next.prev = node.prev;
+        node.prev!.next = node.next;
+        node.next!.prev = node.prev;
 
         this.index.delete(node.data);
     }
@@ -51,7 +51,8 @@ const solver1 = (input: string): string => {
     const cups = parse(input);
 
     // Initialise the linked list
-    let prev: Node<number> = null;
+    // @ts-expect-error - can be fixed later
+    let prev: Node<number> = undefined;
     for (let i = 0; i < cups.length; ++i) {
         prev = list.append(prev, cups[i]);
     }
@@ -63,8 +64,8 @@ const solver1 = (input: string): string => {
         const picked: Array<number> = [];
 
         for (let i = 0; i < 3; ++i) {
-            picked.push(currentNode.next.data);
-            list.erase(currentNode.next);
+            picked.push(currentNode!.next!.data);
+            list.erase(currentNode!.next!);
         }
 
         let dest = currentValue == 1 ? cups.length : currentValue - 1;
@@ -75,22 +76,22 @@ const solver1 = (input: string): string => {
 
         //console.log(dest);
 
-        let dest_node = list.find(dest);
+        let dest_node = list.find(dest)!;
 
         for (let i = 0; i < 3; ++i) {
             dest_node = list.append(dest_node, picked[i]);
         }
 
-        currentNode = currentNode.next;
-        currentValue = currentNode.data;
+        currentNode = currentNode!.next;
+        currentValue = currentNode!.data;
     }
 
     let activeNode = list.find(1);
     const out = [];
 
-    while (activeNode.next.data != 1) {
-        out.push(activeNode.next.data);
-        activeNode = activeNode.next;
+    while (activeNode!.next!.data != 1) {
+        out.push(activeNode!.next!.data);
+        activeNode = activeNode!.next;
     }
 
     return out.join("");
@@ -110,7 +111,7 @@ const insert = <T>(a: Array<T>, index: number, b: Array<T>): Array<T> => {
 const circularSplice = (
     input: Array<number>,
     start: number,
-    length: number
+    length: number,
 ): Array<number> => {
     const out = [];
 
@@ -131,6 +132,8 @@ const shiftLeft = <T>(input: Array<T>, count: number): Array<T> => {
     return [...input.slice(count), ...input.slice(0, count)];
 };
 
+// @ts-expect-error - can be fixed later
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const solver12 = (input: string): string => {
     let cups = parse(input);
 
@@ -177,6 +180,7 @@ const solver2 = (input: string): number => {
     const cups = parse(input);
 
     // Initialise the linked list
+    // @ts-expect-error - can be fixed later
     let prev: Node<number> = null;
     for (let i = 0; i < cups.length; ++i) {
         prev = list.append(prev, cups[i]);
@@ -197,8 +201,8 @@ const solver2 = (input: string): number => {
         const picked: Array<number> = [];
 
         for (let i = 0; i < 3; ++i) {
-            picked.push(currentNode.next.data);
-            list.erase(currentNode.next);
+            picked.push(currentNode!.next!.data);
+            list.erase(currentNode!.next!);
         }
 
         let dest = currentValue == 1 ? 1000000 : currentValue - 1;
@@ -209,18 +213,18 @@ const solver2 = (input: string): number => {
 
         //console.log(dest);
 
-        let dest_node = list.find(dest);
+        let dest_node = list.find(dest)!;
 
         for (let i = 0; i < 3; ++i) {
             dest_node = list.append(dest_node, picked[i]);
         }
 
-        currentNode = currentNode.next;
-        currentValue = currentNode.data;
+        currentNode = currentNode!.next;
+        currentValue = currentNode!.data;
     }
 
     const activeNode = list.find(1);
-    return activeNode.next.data * activeNode.next.next.data;
+    return activeNode!.next!.data * activeNode!.next!.next!.data;
 
     // return out.join("");
 };

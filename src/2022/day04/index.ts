@@ -30,7 +30,7 @@ const overlap = (range1: Range, range2: Range): boolean => {
 export const part1 = (input: string): string => {
     const parsed = parse(input);
     const filtered = parsed.filter(
-        (pair) => contains(pair[0], pair[1]) || contains(pair[1], pair[0])
+        (pair) => contains(pair[0], pair[1]) || contains(pair[1], pair[0]),
     );
 
     return filtered.length.toString();

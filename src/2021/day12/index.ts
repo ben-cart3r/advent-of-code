@@ -10,7 +10,7 @@ const countLowerVertices = (path: Array<string>) => {
     return path.reduce<Map<string, number>>((acc, v) => {
         if (isLowerCase(v)) {
             if (acc.has(v)) {
-                acc.set(v, acc.get(v) + 1);
+                acc.set(v, acc.get(v)! + 1);
             } else {
                 acc.set(v, 1);
             }
@@ -47,7 +47,7 @@ const isDiscovered = (path: Array<string>, vertex: string, part1: boolean) => {
         // any vertex is "discovered" if it is in the path
         if ([...lowerVerticesCount.values()].includes(2)) {
             // Can be added to path if not in path already i.e. count == 0
-            return lowerVerticesCount.get(vertex) > 0;
+            return lowerVerticesCount.get(vertex)! > 0;
         }
 
         // No vertex has been visited twice, so all can be visited again
@@ -59,7 +59,7 @@ const dfs = (
     data: Array<Array<string>>,
     path: Array<string>,
     paths: Array<Array<string>>,
-    part1: boolean
+    part1: boolean,
 ) => {
     const vertex = path[path.length - 1];
 

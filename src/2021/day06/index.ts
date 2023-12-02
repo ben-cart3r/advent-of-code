@@ -11,12 +11,12 @@ const simulate = (fishes: Array<number>, days: number) => {
             acc[fish] += 1;
             return acc;
         },
-        [0, 0, 0, 0, 0, 0, 0, 0, 0]
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
     );
 
     for (let i = 0; i < days; ++i) {
         // Pop from front of array
-        const newFishes = gestationPeriods.shift();
+        const newFishes = gestationPeriods.shift()!;
 
         // Reset fishes that reproduced
         gestationPeriods[6] += newFishes;

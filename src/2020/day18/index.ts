@@ -6,19 +6,19 @@ const parseInput = (input: string): Array<Array<string>> => {
             line
                 .trim()
                 .split("")
-                .filter((token) => token != " ")
+                .filter((token) => token != " "),
         );
 };
 
 const infixToPostfix = (
     tokens: Array<string>,
-    precedence: { [k: string]: number }
+    precedence: { [k: string]: number },
 ): Array<string> => {
     const postfix: Array<string> = [];
     const stack: Array<string> = [];
 
     while (tokens.length > 0) {
-        const token = tokens.shift();
+        const token = tokens.shift()!;
 
         if (!isNaN(parseInt(token))) {
             postfix.push(token);
@@ -26,7 +26,7 @@ const infixToPostfix = (
             stack.push(token);
         } else if (token == ")") {
             while (stack.length > 0 && stack[stack.length - 1] != "(") {
-                postfix.push(stack.pop());
+                postfix.push(stack.pop()!);
             }
 
             // Remove "("
@@ -36,14 +36,14 @@ const infixToPostfix = (
                 stack.length > 0 &&
                 precedence[token] <= precedence[stack[stack.length - 1]]
             ) {
-                postfix.push(stack.pop());
+                postfix.push(stack.pop()!);
             }
             stack.push(token);
         }
     }
 
     while (stack.length > 0) {
-        postfix.push(stack.pop());
+        postfix.push(stack.pop()!);
     }
 
     return postfix;
@@ -53,24 +53,24 @@ const evaluatePostfix = (tokens: Array<string>): number => {
     const stack: Array<number> = [];
 
     while (tokens.length > 0) {
-        const token = tokens.shift();
+        const token = tokens.shift()!;
 
         if (!isNaN(parseInt(token))) {
             stack.push(parseInt(token));
         } else if (token == "*") {
-            const v1 = stack.pop();
-            const v2 = stack.pop();
+            const v1 = stack.pop()!;
+            const v2 = stack.pop()!;
 
             stack.push(v1 * v2);
         } else if (token == "+") {
-            const v1 = stack.pop();
-            const v2 = stack.pop();
+            const v1 = stack.pop()!;
+            const v2 = stack.pop()!;
 
             stack.push(v1 + v2);
         }
     }
 
-    return stack.pop();
+    return stack.pop()!;
 };
 
 const solver1 = (input: string): number => {
@@ -82,9 +82,9 @@ const solver1 = (input: string): number => {
                 infixToPostfix(tokens, {
                     "+": 1,
                     "*": 1,
-                })
-            )
-        )
+                }),
+            ),
+        ),
     );
 };
 
@@ -99,9 +99,9 @@ const solver2 = (input: string): number => {
                 infixToPostfix(tokens, {
                     "+": 2,
                     "*": 1,
-                })
-            )
-        )
+                }),
+            ),
+        ),
     );
 };
 

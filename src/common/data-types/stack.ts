@@ -39,6 +39,7 @@ export class Stack<T> {
 
     [Symbol.iterator](): Iterator<T> {
         return {
+            // @ts-expect-error - can be fixed later
             next: () => {
                 return {
                     done: this.empty(),

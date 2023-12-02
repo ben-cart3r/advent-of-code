@@ -28,7 +28,7 @@ const parse = (input: string): Array<[string, PasswordPolicy]> => {
 const validatePassword = (
     password: string,
     policy: PasswordPolicy,
-    part1: boolean
+    part1: boolean,
 ): boolean => {
     if (part1) {
         const matches = password.match(new RegExp(policy.character, "g"));
@@ -46,7 +46,7 @@ const validatePassword = (
 const solver1 = (input: string): number => {
     const passwords = parse(input);
     const validPasswords = passwords.filter(([password, policy]) =>
-        validatePassword(password, policy, true)
+        validatePassword(password, policy, true),
     );
 
     return validPasswords.length;
@@ -55,7 +55,7 @@ const solver1 = (input: string): number => {
 const solver2 = (input: string): number => {
     const passwords = parse(input);
     const validPasswords = passwords.filter(([password, policy]) =>
-        validatePassword(password, policy, false)
+        validatePassword(password, policy, false),
     );
 
     return validPasswords.length;

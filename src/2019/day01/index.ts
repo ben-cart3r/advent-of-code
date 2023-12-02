@@ -27,7 +27,7 @@ const calculateFuelRequirements = (mass: number, part: string): number => {
 export const part1 = (input: string) => {
     const masses = parse(input);
     const requiredFuels = masses.map((mass) =>
-        calculateFuelRequirements(mass, "p1")
+        calculateFuelRequirements(mass, "p1"),
     );
     const totalFuel = sum(...requiredFuels);
 
@@ -37,7 +37,7 @@ export const part1 = (input: string) => {
 export const part2 = (input: string) => {
     const masses = parse(input);
     const requiredFuels = masses.map((mass) =>
-        calculateFuelRequirements(mass, "p2")
+        calculateFuelRequirements(mass, "p2"),
     );
     const totalFuel = sum(...requiredFuels);
 

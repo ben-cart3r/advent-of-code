@@ -59,11 +59,12 @@ const getActiveYear = () => {
             describe: "Input File",
             type: "string",
             default: "input.txt",
-        }).argv;
+        })
+        .parseSync();
 
     await runSolution(
         parseInt(options.year),
         parseInt(options.day),
-        options.input
+        options.input,
     );
 })();

@@ -15,8 +15,8 @@ const parse = (input: string): Array<Tile> => {
         const rows = tileStr.split("\n");
 
         // Parse id from first row of tile
-        const idStr = rows.shift();
-        const id = parseInt(idStr.substr(5, 4)); // e.g. Tile xxxx:
+        const idStr = rows.shift()!;
+        const id = parseInt(idStr.substring(5, 4)); // e.g. Tile xxxx:
 
         // Parse 4 sides of tile
         const top = rows[0];
@@ -135,7 +135,7 @@ const solver2 = (input: string) => {
 
 export { solver1, solver2 };
 
-export default (input: string): string => {
+export default (): string => {
     const sample = `Tile 2311:
 ..##.#..#.
 ##..#.....
@@ -248,9 +248,9 @@ Tile 3079:
 
     return "";
 
-    const result1 = solver1(input);
-    const result2 = solver2(input);
+    // const result1 = solver1(input);
+    // const result2 = solver2(input);
 
-    return `\t Part 1 result: ${result1}
-    \t Part 2 result: ${result2}`;
+    // return `\t Part 1 result: ${result1}
+    // \t Part 2 result: ${result2}`;
 };

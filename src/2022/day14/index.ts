@@ -40,7 +40,7 @@ const nextMove = ({ x, y }: Point, cave: Map<string, string>) => {
 };
 
 const expandRockFormations = (
-    rockFormations: Array<Array<Point>>
+    rockFormations: Array<Array<Point>>,
 ): Map<string, string> => {
     const expanded = new Map<string, string>();
 

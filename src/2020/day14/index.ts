@@ -10,7 +10,7 @@ const parseInput = (input: string) => {
                     type: "mem",
                     location: type.substring(
                         type.indexOf("[") + 1,
-                        type.indexOf("]")
+                        type.indexOf("]"),
                     ),
                     value,
                 };
@@ -80,8 +80,8 @@ const solver1 = (input: string): number => {
         if (type == "mask") {
             mask = value;
         } else {
-            memory[location] = toDec(
-                applyMask(toBinary(parseInt(value)), mask)
+            memory[location!] = toDec(
+                applyMask(toBinary(parseInt(value)), mask),
             );
         }
     }
@@ -101,8 +101,8 @@ const solver2 = (input: string): number => {
             mask = value;
         } else {
             const addressMask = applyAddressMask(
-                toBinary(parseInt(location)),
-                mask
+                toBinary(parseInt(location!)),
+                mask,
             );
             const addresses = getAddresses(addressMask);
 

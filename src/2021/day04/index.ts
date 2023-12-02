@@ -69,7 +69,7 @@ export const part1 = (input: string) => {
     // Final State
     const drawn = inputs.slice(0, counter - 1);
     const lastDrawn = drawn[drawn.length - 1];
-    const winningBoard = boards[winningBoardIndex];
+    const winningBoard = boards[winningBoardIndex!];
 
     // Find all unmarked tiles on board
     const unmarked = [...difference(new Set(winningBoard), new Set(drawn))];
