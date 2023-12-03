@@ -24,7 +24,7 @@ describe("2023-03", () => {
         it("should solve for sample data", () => {
             const result = part2(sampleData);
 
-            expect(result).toEqual("");
+            expect(result).toEqual("467835");
         });
     });
 });
