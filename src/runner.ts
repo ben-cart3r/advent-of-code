@@ -8,18 +8,21 @@ const runSolution = async (year: number, day: number, fileName: string) => {
     const dataPath = path.join(__dirname, `${dirPath}/${fileName}`);
 
     console.log(`-----------\nYear ${year} Day ${day}\n-----------`);
-    console.time("File load time");
-
+    console.time("File load time\t\t");
     const data = await fs.readFile(dataPath, "utf8");
-    const solution = await import(dirPath);
+    console.timeEnd("File load time\t\t");
 
-    console.timeEnd("File load time");
-    console.time("Solution run time");
+    console.time("Solution load time\t");
+    const solution = await import(dirPath);
+    console.timeEnd("Solution load time\t");
+
+    console.time("Solution run time\t");
 
     const output1 = solution.part1(data);
     const output2 = solution.part2(data);
 
-    console.timeEnd("Solution run time");
+    console.timeEnd("Solution run time\t");
+    console.log("");
     console.log("Results:");
     console.log(`Part 1 result: ${output1}`);
     console.log(`Part 2 result: ${output2}`);
