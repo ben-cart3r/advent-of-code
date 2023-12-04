@@ -56,8 +56,9 @@ export const part2 = (input: string): string => {
     for (const card of scratchCards) {
         store[card.id] += 1;
 
-        const nextScratchCards = [...getWinningNumbers(card)]
-            .map((_, index) => card.id + index + 1);
+        const nextScratchCards = [...getWinningNumbers(card)].map(
+            (_, index) => card.id + index + 1,
+        );
 
         for (const cardId of nextScratchCards) {
             store[cardId] += store[card.id];
