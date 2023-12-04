@@ -1,6 +1,8 @@
 coverage
 node_modules
 dist
+test_results
+.DS_Store
 .eslintcache
 input.txt
 sample.txt

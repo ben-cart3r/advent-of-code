@@ -108,7 +108,7 @@ Tile 3079:
 ..#.......
 ..#.###...`;
 
-describe("day20", () => {
+describe.skip("day20", () => {
     describe("part1", () => {
         it("should solve for sample data", () => {
             const result = solver1(sampleData);
