@@ -1,6 +1,6 @@
 {
-    "tabWidth": 4,
-    "importOrder": ["^[./]"],
-    "importOrderSeparation": true,
-    "importOrderSortSpecifiers": true
-}
+    "trailingComma": "all",
+    "printWidth": 120,
+    "semi": true,
+    "arrowParens": "avoid"
+  }

@@ -109,19 +109,19 @@ Tile 3079:
 ..#.###...`;
 
 describe.skip("day20", () => {
-    describe("part1", () => {
-        it("should solve for sample data", () => {
-            const result = solver1(sampleData);
+  describe("part1", () => {
+    it("should solve for sample data", () => {
+      const result = solver1(sampleData);
 
-            expect(result).toEqual(20899048083289);
-        });
+      expect(result).toEqual(20899048083289);
     });
+  });
 
-    // describe("part2", () => {
-    //     it("should solve for sample data", () => {
-    //         const result = solver2(sampleData);
+  // describe("part2", () => {
+  //     it("should solve for sample data", () => {
+  //         const result = solver2(sampleData);
 
-    //         expect(result).toEqual(273);
-    //     });
-    // });
+  //         expect(result).toEqual(273);
+  //     });
+  // });
 });

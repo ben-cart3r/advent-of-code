@@ -4,12 +4,13 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "DavidAnson.vscode-markdownlint",
-                "streetsidesoftware.code-spell-checker",
-                "redhat.vscode-yaml",
-                "GitHub.vscode-github-actions",
-                "dbaeumer.vscode-eslint"
-            ]
+				"DavidAnson.vscode-markdownlint",
+				"streetsidesoftware.code-spell-checker",
+				"redhat.vscode-yaml",
+				"GitHub.vscode-github-actions",
+				"dbaeumer.vscode-eslint",
+				"EditorConfig.EditorConfig"
+			]
         }
     },
     "postCreateCommand": "npm install"
