@@ -112,3 +112,16 @@ export const zip = <T>(a: Array<T>, b: Array<T>) => {
     return [value, b[index]];
   });
 };
+
+export const frequencies = <T extends string | number | symbol>(array: Array<T>): Record<T, number> => {
+  return array.reduce(
+    (acc, item) => {
+      if (!acc[item]) {
+        acc[item] = 0;
+      }
+      acc[item]++;
+      return acc;
+    },
+    {} as Record<T, number>,
+  );
+};
