@@ -125,3 +125,18 @@ export const frequencies = <T extends string | number | symbol>(array: Array<T>)
     {} as Record<T, number>,
   );
 };
+
+// greatest common denominator
+export const gcd = (a: number, b: number): number => {
+  return b == 0 ? a : gcd(b, a % b);
+};
+
+// lowest common multiple
+export const lcm = (...numbers: Array<number>): number => {
+  return numbers.slice(1).reduce((a, b) => {
+    if (a > b) {
+      return (a / gcd(a, b)) * b;
+    }
+    return (b / gcd(a, b)) * a;
+  }, numbers[0]);
+};

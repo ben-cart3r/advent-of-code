@@ -1,5 +1,6 @@
 import { frequencies, sum } from "../../common";
-import Input from "../../common/input";
+// import Input from "../../common/input";
+import { newLineRegex, splitByWhitespace } from "../../common/string-helpers";
 
 const cards = ["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"] as const;
 
@@ -65,11 +66,11 @@ const calcBestScore = (cards: Array<Card>): number => {
 };
 
 const parse = (input: string, calculateStrength: HandStrengthCalculator): Array<PokerHand> => {
-  return new Input(input)
-    .asLines()
-    .asStrings()
-    .map(line => {
-      const [cards, bet] = line.split(/\s+/);
+  return input
+    .trim()
+    .split(newLineRegex)
+    .map(splitByWhitespace)
+    .map(([cards, bet]) => {
       const characters = cards.split("");
 
       return {
@@ -113,6 +114,7 @@ export const part1 = (input: string): string => {
 
 export const part2 = (input: string): string => {
   const parsed = parse(input, calcBestScore);
+  console.log(parsed);
   const sorted = parsed.sort((a, b) => comparePokerHands(a, b, calculateCardStrength(true)));
   const values = sorted.map((hand, index) => hand.bet * (index + 1));
 
