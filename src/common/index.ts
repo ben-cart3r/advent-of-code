@@ -140,3 +140,7 @@ export const lcm = (...numbers: Array<number>): number => {
     return (b / gcd(a, b)) * a;
   }, numbers[0]);
 };
+
+export const last = <T>(arr: Array<T>) => {
+  return arr[arr.length - 1];
+};

@@ -11,6 +11,10 @@ export const toNumber = (input: string) => {
   return parseInt(input);
 };
 
+export const toNumbers = (input: Array<string>) => {
+  return input.map(toNumber);
+};
+
 export const createSplitter = (regex: RegExp) => (input: string) => {
   return input.split(regex);
 };
